@@ -1,0 +1,17 @@
+C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\Assets\Images\racket_ace.png
+C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\Assets\Images\racket_boris.png
+C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\Assets\Images\racket_emiko.png
+C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\Assets\Images\racket_lin.png
+C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\Assets\Images\racket_mikko.png
+C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\PongMasters.exe.config
+C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\PongMasters.exe
+C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\PongMasters.pdb
+C:\Users\adgun\source\repos\PongMasters\PongMasters\obj\Debug\PongMasters.csproj.AssemblyReference.cache
+C:\Users\adgun\source\repos\PongMasters\PongMasters\obj\Debug\PongMasters.GameWindow.resources
+C:\Users\adgun\source\repos\PongMasters\PongMasters\obj\Debug\PongMasters.MainMenu.resources
+C:\Users\adgun\source\repos\PongMasters\PongMasters\obj\Debug\PongMasters.Properties.Resources.resources
+C:\Users\adgun\source\repos\PongMasters\PongMasters\obj\Debug\PongMasters.Scoreboard.resources
+C:\Users\adgun\source\repos\PongMasters\PongMasters\obj\Debug\PongMasters.csproj.GenerateResource.cache
+C:\Users\adgun\source\repos\PongMasters\PongMasters\obj\Debug\PongMasters.csproj.CoreCompileInputs.cache
+C:\Users\adgun\source\repos\PongMasters\PongMasters\obj\Debug\PongMasters.exe
+C:\Users\adgun\source\repos\PongMasters\PongMasters\obj\Debug\PongMasters.pdb
