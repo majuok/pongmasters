@@ -3,24 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\adgun\\source\\repos\\PongMasters\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{85FEFB66-DDF9-4D8F-A6F1-78E72FA8C336}|PongMasters\\PongMasters.csproj|c:\\users\\adgun\\source\\repos\\pongmasters\\pongmasters\\mainmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{85FEFB66-DDF9-4D8F-A6F1-78E72FA8C336}|PongMasters\\PongMasters.csproj|C:\\Users\\adgun\\source\\repos\\PongMasters\\pongmasters\\mainmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{85FEFB66-DDF9-4D8F-A6F1-78E72FA8C336}|PongMasters\\PongMasters.csproj|solutionrelative:pongmasters\\mainmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{85FEFB66-DDF9-4D8F-A6F1-78E72FA8C336}|PongMasters\\PongMasters.csproj|c:\\users\\adgun\\source\\repos\\pongmasters\\pongmasters\\gamewindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{85FEFB66-DDF9-4D8F-A6F1-78E72FA8C336}|PongMasters\\PongMasters.csproj|solutionrelative:pongmasters\\gamewindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{85FEFB66-DDF9-4D8F-A6F1-78E72FA8C336}|PongMasters\\PongMasters.csproj|c:\\users\\adgun\\source\\repos\\pongmasters\\pongmasters\\mainmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{85FEFB66-DDF9-4D8F-A6F1-78E72FA8C336}|PongMasters\\PongMasters.csproj|solutionrelative:pongmasters\\mainmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{85FEFB66-DDF9-4D8F-A6F1-78E72FA8C336}|PongMasters\\PongMasters.csproj|c:\\users\\adgun\\source\\repos\\pongmasters\\pongmasters\\gamewindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{85FEFB66-DDF9-4D8F-A6F1-78E72FA8C336}|PongMasters\\PongMasters.csproj|C:\\Users\\adgun\\source\\repos\\PongMasters\\pongmasters\\gamewindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{85FEFB66-DDF9-4D8F-A6F1-78E72FA8C336}|PongMasters\\PongMasters.csproj|solutionrelative:pongmasters\\gamewindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{85FEFB66-DDF9-4D8F-A6F1-78E72FA8C336}|PongMasters\\PongMasters.csproj|c:\\users\\adgun\\source\\repos\\pongmasters\\pongmasters\\scoreboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{85FEFB66-DDF9-4D8F-A6F1-78E72FA8C336}|PongMasters\\PongMasters.csproj|C:\\Users\\adgun\\source\\repos\\PongMasters\\pongmasters\\scoreboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{85FEFB66-DDF9-4D8F-A6F1-78E72FA8C336}|PongMasters\\PongMasters.csproj|solutionrelative:pongmasters\\scoreboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{85FEFB66-DDF9-4D8F-A6F1-78E72FA8C336}|PongMasters\\PongMasters.csproj|C:\\Users\\adgun\\source\\repos\\PongMasters\\pongmasters\\gamewindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{85FEFB66-DDF9-4D8F-A6F1-78E72FA8C336}|PongMasters\\PongMasters.csproj|solutionrelative:pongmasters\\gamewindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,32 +30,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "MainMenu.cs",
               "DocumentMoniker": "C:\\Users\\adgun\\source\\repos\\PongMasters\\PongMasters\\MainMenu.cs",
               "RelativeDocumentMoniker": "PongMasters\\MainMenu.cs",
               "ToolTip": "C:\\Users\\adgun\\source\\repos\\PongMasters\\PongMasters\\MainMenu.cs",
               "RelativeToolTip": "PongMasters\\MainMenu.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAABPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-27T15:58:00.611Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "GameWindow.cs",
-              "DocumentMoniker": "C:\\Users\\adgun\\source\\repos\\PongMasters\\PongMasters\\GameWindow.cs",
-              "RelativeDocumentMoniker": "PongMasters\\GameWindow.cs",
-              "ToolTip": "C:\\Users\\adgun\\source\\repos\\PongMasters\\PongMasters\\GameWindow.cs",
-              "RelativeToolTip": "PongMasters\\GameWindow.cs",
-              "ViewState": "AgIAAEgAAAAAAAAAAAAwwGIAAABDAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T14:41:23.48Z",
               "EditorCaption": ""
             },
             {
@@ -72,7 +59,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
+              "Title": "GameWindow.cs",
+              "DocumentMoniker": "C:\\Users\\adgun\\source\\repos\\PongMasters\\PongMasters\\GameWindow.cs",
+              "RelativeDocumentMoniker": "PongMasters\\GameWindow.cs",
+              "ToolTip": "C:\\Users\\adgun\\source\\repos\\PongMasters\\PongMasters\\GameWindow.cs",
+              "RelativeToolTip": "PongMasters\\GameWindow.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAIAwwJIAAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-27T14:41:23.48Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "GameWindow.cs [Design]",
               "DocumentMoniker": "C:\\Users\\adgun\\source\\repos\\PongMasters\\PongMasters\\GameWindow.cs",
               "RelativeDocumentMoniker": "PongMasters\\GameWindow.cs",
@@ -84,7 +84,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "Scoreboard.cs [Design]",
               "DocumentMoniker": "C:\\Users\\adgun\\source\\repos\\PongMasters\\PongMasters\\Scoreboard.cs",
               "RelativeDocumentMoniker": "PongMasters\\Scoreboard.cs",

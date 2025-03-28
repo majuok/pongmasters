@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
 
 namespace PongMasters
@@ -19,6 +20,7 @@ namespace PongMasters
         int opponent_speed_change = 50;
         int playerScore = 0;
         int opponentScore = 0;
+        int opponentsWon;
         bool goLeft, goRight;
         Random random = new Random();
         int[] randomOpponent = { 5, 6, 8, 9 };
@@ -27,6 +29,7 @@ namespace PongMasters
         public GameWindow()
         {
             InitializeComponent();
+            opponentsWon = LoadProgress();
         }
 
         private void KeyIsDown(object sender, KeyEventArgs e)
@@ -128,6 +131,20 @@ namespace PongMasters
 
 
             // if opponent wins...
+        }
+
+        private void SaveProgress(int opponentsWon)
+        {
+            File.WriteAllText("progress.txt",  opponentsWon.ToString());
+        }
+
+        private int LoadProgress()
+        {
+            if (File.Exists("progress.txt"))
+            {
+                return int.Parse(File.ReadAllText("progress.txt"));
+            }
+            return 0; // start from 0 if no save file exists
         }
     }
 }

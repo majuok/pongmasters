@@ -33,9 +33,13 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.buttonPlay = new System.Windows.Forms.PictureBox();
+            this.buttonExit = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buttonPlay)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buttonExit)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -43,7 +47,9 @@
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
             this.tableLayoutPanel1.Controls.Add(this.pictureBox1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.pictureBox2, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.buttonPlay, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.buttonExit, 0, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
             // 
@@ -66,6 +72,24 @@
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
             // 
+            // buttonPlay
+            // 
+            resources.ApplyResources(this.buttonPlay, "buttonPlay");
+            this.buttonPlay.Name = "buttonPlay";
+            this.buttonPlay.TabStop = false;
+            this.buttonPlay.Click += new System.EventHandler(this.buttonPlay_Click);
+            this.buttonPlay.MouseEnter += new System.EventHandler(this.buttonPlay_MouseEnter);
+            this.buttonPlay.MouseLeave += new System.EventHandler(this.buttonPlay_MouseLeave);
+            // 
+            // buttonExit
+            // 
+            resources.ApplyResources(this.buttonExit, "buttonExit");
+            this.buttonExit.Name = "buttonExit";
+            this.buttonExit.TabStop = false;
+            this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
+            this.buttonExit.MouseEnter += new System.EventHandler(this.buttonExit_MouseEnter);
+            this.buttonExit.MouseLeave += new System.EventHandler(this.buttonExit_MouseLeave);
+            // 
             // MainMenu
             // 
             resources.ApplyResources(this, "$this");
@@ -78,6 +102,8 @@
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buttonPlay)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buttonExit)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -88,6 +114,8 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.PictureBox buttonPlay;
+        private System.Windows.Forms.PictureBox buttonExit;
     }
 }
 

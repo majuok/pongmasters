@@ -249,7 +249,7 @@
             // playerCard
             // 
             this.playerCard.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.playerCard.Image = global::PongMasters.Properties.Resources.card_player;
+            this.playerCard.Image = global::PongMasters.Properties.Resources.card_player2;
             this.playerCard.Location = new System.Drawing.Point(26, 527);
             this.playerCard.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             this.playerCard.Name = "playerCard";
@@ -323,6 +323,7 @@
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Press Start 2P", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.Name = "GameWindow";
             this.Text = "Pong Masters";
