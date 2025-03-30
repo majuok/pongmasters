@@ -1,6 +1,8 @@
 ﻿using System.Windows.Forms;
 using System.Drawing;
 using System.IO;
+using System.Linq;
+using System;
 
 namespace PongMasters
 {
@@ -18,6 +20,8 @@ namespace PongMasters
 
         }
 
+        // MouseEnter/MouseLeave triggers immediately while MouseHover triggers after a short delay
+        // => MouseEnter/MouseLeave is more responsive
         private void buttonPlay_MouseEnter(object sender, System.EventArgs e)
         {
             buttonPlay.Image = Image.FromFile("Assets/Images/button_play_hover.png");
@@ -48,6 +52,14 @@ namespace PongMasters
             scoreboard.StartPosition = FormStartPosition.Manual;
             scoreboard.Location = this.Location;
             this.Hide();
+
+            // When scoreboard is closed, show main menu
+            scoreboard.FormClosed += (s, args) =>
+            {
+                this.Location = scoreboard.Location; // Preserve position
+                this.Show();
+            };
+
             scoreboard.Show();
         }
 
