@@ -28,10 +28,19 @@ namespace PongMasters
         string[] dialogue;
         Random random = new Random();
 
+        // Maybe the change the gaining points to losing lifes
+
         public GameWindow()
         {
             InitializeComponent();
             opponentsWon = LoadProgress();
+            if (opponentsWon < 0 || opponentsWon >= 5)
+            {
+                opponentsWon = 0;
+                SaveProgress(opponentsWon);
+                // After game completion show how many rounds the player lost during his/her climb to the top
+            }
+
             opponentPoints = new PictureBox[] { opponentPoint1, opponentPoint2, opponentPoint3 };
             playerPoints = new PictureBox[] { playerPoint1, playerPoint2, playerPoint3 };
 
@@ -185,10 +194,11 @@ namespace PongMasters
             // Ensure opponent paddle stays within gametable
             if (racketOpponent.Left < gametable.Left)
             {
-                racketOpponent.Left = gametable.Left;
+                racketOpponent.Left = gametable.Left; // Relocate the opponent's racket every tick
             }
             if (racketOpponent.Right > gametable.Right)
             {
+                // Cannot type racketOpponent.Right since relocation must happen from the left side
                 racketOpponent.Left = gametable.Right - racketOpponent.Width;
             }
 
