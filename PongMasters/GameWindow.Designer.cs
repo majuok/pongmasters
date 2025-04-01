@@ -115,7 +115,7 @@
             // opponentDialogue
             // 
             this.opponentDialogue.BackColor = System.Drawing.Color.Transparent;
-            this.opponentDialogue.Font = new System.Drawing.Font("Press Start 2P", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.opponentDialogue.Font = new System.Drawing.Font("Press Start 2P", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.opponentDialogue.ForeColor = System.Drawing.Color.White;
             this.opponentDialogue.Location = new System.Drawing.Point(3, 0);
             this.opponentDialogue.Name = "opponentDialogue";
@@ -241,7 +241,7 @@
             // 
             // GameWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(17F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(200)))), ((int)(((byte)(163)))));
             this.ClientSize = new System.Drawing.Size(834, 811);

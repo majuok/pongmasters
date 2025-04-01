@@ -1,29 +1,29 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\adgun\\source\\repos\\PongMasters\\",
+  "WorkspaceRootPath": "C:\\Users\\s4juma03\\source\\repos\\pongmasters\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{85FEFB66-DDF9-4D8F-A6F1-78E72FA8C336}|PongMasters\\PongMasters.csproj|c:\\users\\adgun\\source\\repos\\pongmasters\\pongmasters\\gamewindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{85FEFB66-DDF9-4D8F-A6F1-78E72FA8C336}|PongMasters\\PongMasters.csproj|c:\\users\\s4juma03\\source\\repos\\pongmasters\\pongmasters\\gamewindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{85FEFB66-DDF9-4D8F-A6F1-78E72FA8C336}|PongMasters\\PongMasters.csproj|solutionrelative:pongmasters\\gamewindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{85FEFB66-DDF9-4D8F-A6F1-78E72FA8C336}|PongMasters\\PongMasters.csproj|C:\\Users\\adgun\\source\\repos\\PongMasters\\pongmasters\\gamewindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{85FEFB66-DDF9-4D8F-A6F1-78E72FA8C336}|PongMasters\\PongMasters.csproj|C:\\Users\\s4juma03\\source\\repos\\pongmasters\\pongmasters\\gamewindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{85FEFB66-DDF9-4D8F-A6F1-78E72FA8C336}|PongMasters\\PongMasters.csproj|solutionrelative:pongmasters\\gamewindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{85FEFB66-DDF9-4D8F-A6F1-78E72FA8C336}|PongMasters\\PongMasters.csproj|C:\\Users\\adgun\\source\\repos\\PongMasters\\pongmasters\\mainmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{85FEFB66-DDF9-4D8F-A6F1-78E72FA8C336}|PongMasters\\PongMasters.csproj|C:\\Users\\s4juma03\\source\\repos\\pongmasters\\PongMasters\\Scoreboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{85FEFB66-DDF9-4D8F-A6F1-78E72FA8C336}|PongMasters\\PongMasters.csproj|solutionrelative:PongMasters\\Scoreboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{85FEFB66-DDF9-4D8F-A6F1-78E72FA8C336}|PongMasters\\PongMasters.csproj|C:\\Users\\s4juma03\\source\\repos\\pongmasters\\pongmasters\\mainmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{85FEFB66-DDF9-4D8F-A6F1-78E72FA8C336}|PongMasters\\PongMasters.csproj|solutionrelative:pongmasters\\mainmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{85FEFB66-DDF9-4D8F-A6F1-78E72FA8C336}|PongMasters\\PongMasters.csproj|C:\\Users\\adgun\\source\\repos\\PongMasters\\pongmasters\\scoreboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{85FEFB66-DDF9-4D8F-A6F1-78E72FA8C336}|PongMasters\\PongMasters.csproj|solutionrelative:pongmasters\\scoreboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{85FEFB66-DDF9-4D8F-A6F1-78E72FA8C336}|PongMasters\\PongMasters.csproj|C:\\Users\\adgun\\source\\repos\\PongMasters\\pongmasters\\mainmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{85FEFB66-DDF9-4D8F-A6F1-78E72FA8C336}|PongMasters\\PongMasters.csproj|C:\\Users\\s4juma03\\source\\repos\\pongmasters\\pongmasters\\mainmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{85FEFB66-DDF9-4D8F-A6F1-78E72FA8C336}|PongMasters\\PongMasters.csproj|solutionrelative:pongmasters\\mainmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{85FEFB66-DDF9-4D8F-A6F1-78E72FA8C336}|PongMasters\\PongMasters.csproj|C:\\Users\\adgun\\source\\repos\\PongMasters\\pongmasters\\scoreboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{85FEFB66-DDF9-4D8F-A6F1-78E72FA8C336}|PongMasters\\PongMasters.csproj|C:\\Users\\s4juma03\\source\\repos\\pongmasters\\pongmasters\\scoreboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{85FEFB66-DDF9-4D8F-A6F1-78E72FA8C336}|PongMasters\\PongMasters.csproj|solutionrelative:pongmasters\\scoreboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
@@ -34,27 +34,15 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "MainMenu.cs",
-              "DocumentMoniker": "C:\\Users\\adgun\\source\\repos\\PongMasters\\PongMasters\\MainMenu.cs",
-              "RelativeDocumentMoniker": "PongMasters\\MainMenu.cs",
-              "ToolTip": "C:\\Users\\adgun\\source\\repos\\PongMasters\\PongMasters\\MainMenu.cs",
-              "RelativeToolTip": "PongMasters\\MainMenu.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T15:58:00.611Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "MainMenu.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\adgun\\source\\repos\\PongMasters\\PongMasters\\MainMenu.cs",
+              "DocumentMoniker": "C:\\Users\\s4juma03\\source\\repos\\pongmasters\\PongMasters\\MainMenu.cs",
               "RelativeDocumentMoniker": "PongMasters\\MainMenu.cs",
-              "ToolTip": "C:\\Users\\adgun\\source\\repos\\PongMasters\\PongMasters\\MainMenu.cs [Design]",
+              "ToolTip": "C:\\Users\\s4juma03\\source\\repos\\pongmasters\\PongMasters\\MainMenu.cs [Design]",
               "RelativeToolTip": "PongMasters\\MainMenu.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-27T12:21:11.56Z"
@@ -63,11 +51,11 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "GameWindow.cs",
-              "DocumentMoniker": "C:\\Users\\adgun\\source\\repos\\PongMasters\\PongMasters\\GameWindow.cs",
+              "DocumentMoniker": "C:\\Users\\s4juma03\\source\\repos\\pongmasters\\PongMasters\\GameWindow.cs",
               "RelativeDocumentMoniker": "PongMasters\\GameWindow.cs",
-              "ToolTip": "C:\\Users\\adgun\\source\\repos\\PongMasters\\PongMasters\\GameWindow.cs",
+              "ToolTip": "C:\\Users\\s4juma03\\source\\repos\\pongmasters\\PongMasters\\GameWindow.cs",
               "RelativeToolTip": "PongMasters\\GameWindow.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAACEAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAIsAAAAAAAAAAAAhwPYAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-27T14:41:23.48Z",
               "EditorCaption": ""
@@ -76,32 +64,45 @@
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "GameWindow.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\adgun\\source\\repos\\PongMasters\\PongMasters\\GameWindow.cs",
+              "DocumentMoniker": "C:\\Users\\s4juma03\\source\\repos\\pongmasters\\PongMasters\\GameWindow.cs",
               "RelativeDocumentMoniker": "PongMasters\\GameWindow.cs",
-              "ToolTip": "C:\\Users\\adgun\\source\\repos\\PongMasters\\PongMasters\\GameWindow.cs [Design]",
+              "ToolTip": "C:\\Users\\s4juma03\\source\\repos\\pongmasters\\PongMasters\\GameWindow.cs [Design]",
               "RelativeToolTip": "PongMasters\\GameWindow.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T12:22:39.948Z"
+              "WhenOpened": "2025-03-27T12:22:39.948Z",
+              "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "Scoreboard.cs",
-              "DocumentMoniker": "C:\\Users\\adgun\\source\\repos\\PongMasters\\PongMasters\\Scoreboard.cs",
+              "DocumentMoniker": "C:\\Users\\s4juma03\\source\\repos\\pongmasters\\PongMasters\\Scoreboard.cs",
               "RelativeDocumentMoniker": "PongMasters\\Scoreboard.cs",
-              "ToolTip": "C:\\Users\\adgun\\source\\repos\\PongMasters\\PongMasters\\Scoreboard.cs",
+              "ToolTip": "C:\\Users\\s4juma03\\source\\repos\\pongmasters\\PongMasters\\Scoreboard.cs",
               "RelativeToolTip": "PongMasters\\Scoreboard.cs",
-              "ViewState": "AgIAAB0AAAAAAAAAAAA9wEAAAABBAAAAAAAAAA==",
+              "ViewState": "AgIAACQAAAAAAAAAAAAiwDEAAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-28T19:32:09.629Z"
             },
             {
               "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MainMenu.cs",
+              "DocumentMoniker": "C:\\Users\\s4juma03\\source\\repos\\pongmasters\\PongMasters\\MainMenu.cs",
+              "RelativeDocumentMoniker": "PongMasters\\MainMenu.cs",
+              "ToolTip": "C:\\Users\\s4juma03\\source\\repos\\pongmasters\\PongMasters\\MainMenu.cs",
+              "RelativeToolTip": "PongMasters\\MainMenu.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABsAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-27T15:58:00.611Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 5,
               "Title": "Scoreboard.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\adgun\\source\\repos\\PongMasters\\PongMasters\\Scoreboard.cs",
+              "DocumentMoniker": "C:\\Users\\s4juma03\\source\\repos\\pongmasters\\PongMasters\\Scoreboard.cs",
               "RelativeDocumentMoniker": "PongMasters\\Scoreboard.cs",
-              "ToolTip": "C:\\Users\\adgun\\source\\repos\\PongMasters\\PongMasters\\Scoreboard.cs [Design]",
+              "ToolTip": "C:\\Users\\s4juma03\\source\\repos\\pongmasters\\PongMasters\\Scoreboard.cs [Design]",
               "RelativeToolTip": "PongMasters\\Scoreboard.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-27T12:18:20.324Z"

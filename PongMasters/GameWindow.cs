@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
+using WMPLib; // for music
 
 namespace PongMasters
 {
@@ -22,11 +23,15 @@ namespace PongMasters
         int opponentsWon, hitLimit;
         private PictureBox[] opponentPoints;
         private PictureBox[] playerPoints;
+        private Timer dialogueTimer;
+        int dialogueStep = 0;
         bool goLeft, goRight;
         int[] randomBall = new int[5];
         //int[] randomOpponent = { 5, 6, 8, 9 };
         string[] dialogue;
         Random random = new Random();
+        WindowsMediaPlayer sfxPlayer = new WindowsMediaPlayer();
+        WindowsMediaPlayer musicPlayer = new WindowsMediaPlayer();
 
         // Maybe the change the gaining points to losing lifes
 
@@ -47,8 +52,9 @@ namespace PongMasters
             opponentPoint1.Image = opponentPoint2.Image = opponentPoint3.Image = Image.FromFile("Assets/Images/point_empty.png");
             playerPoint1.Image = playerPoint2.Image = playerPoint3.Image = Image.FromFile("Assets/Images/point_empty2.png");
 
-            ball.Top = gametable.Height / 2;
-            ball.Left = gametable.Width / 2;
+            
+            ball.Top = gametable.Top + (gametable.Height / 2) - (ball.Height / 2);
+            ball.Left = gametable.Left + (gametable.Width / 2) - (ball.Width / 2);
 
             switch (opponentsWon)
             {
@@ -99,16 +105,70 @@ namespace PongMasters
                     break;
             }
 
-            opponentDialogue.Text = dialogue[0];
+            PlaySoundEffect("Assets/Sounds/crowd.mp3");
 
-            // after 3-5 seconds
+            dialogueTimer = new Timer
+            {
+                Interval = 2000
+            };
+            dialogueTimer.Tick += IntroDialogueTimer_Tick; // Run the function with every tick
+            dialogueTimer.Start();
+            // Player can always move his paddle but the ball starts moving only now
+        }
 
-            opponentDialogue.Text = dialogue[1];
+        private void IntroDialogueTimer_Tick(object sender, EventArgs e)
+        {
+            switch (dialogueStep)
+            {
+                // After 2 seconds
+                case 0:
+                    opponentDialogue.Text = dialogue[0];
+                    PlaySoundEffect("Assets/Sounds/taunt_male1.mp3");
+                    dialogueTimer.Interval = 4000;
+                    break;
+                // After 6 seconds
+                case 1:
+                    opponentDialogue.Text = dialogue[1];
+                    PlaySoundEffect("Assets/Sounds/taunt_male1.mp3");
+                    break;
+                // After 10 seconds
+                case 2:
+                    opponentDialogue.Text = "";
+                    musicPlayer.URL = "Assets/Sounds/opponent1.mp3";
+                    musicPlayer.settings.setMode("loop", true);
+                    musicPlayer.controls.play();
+                    dialogueTimer.Stop();
+                    GameTimer.Start();
+                    return;
+            }
+            dialogueStep++;
+        }
 
-            // after 3-5 seconds
+        private void RoundDialogueTimer_Tick(object sender, EventArgs e)
+        {
+            switch (dialogueStep)
+            {
+                // After 1 second
+                case 0:
+                    opponentDialogue.Text = dialogue[2]; // or 3
+                    PlaySoundEffect("Assets/Sounds/taunt_male1.mp3");
+                    dialogueTimer.Interval = 3000;
+                    break;
+                // After 4 seconds
+                case 1:
+                    GameTimer.Start();
+                    dialogueTimer.Stop();
+                    opponentDialogue.Text = "";
+                    PlaySoundEffect("Assets/Sounds/roundstart.mp3");
+                    break;
+            }
+            dialogueStep++;
+        }
 
-            opponentDialogue.Text = "";
-            GameTimer.Start();
+        void PlaySoundEffect(string soundFile)
+        {
+            sfxPlayer.URL = soundFile;
+            sfxPlayer.controls.play();
         }
 
         private void KeyIsDown(object sender, KeyEventArgs e)
@@ -116,6 +176,7 @@ namespace PongMasters
             if (e.KeyCode == Keys.Right)
             {
                 goRight = true;
+                // maybe add paddle movement sounds
             }
             if (e.KeyCode == Keys.Left)
             {
@@ -128,6 +189,7 @@ namespace PongMasters
             if (e.KeyCode == Keys.Right)
             {
                 goRight = false;
+                // maybe stop paddle movement sounds
             }
             if (e.KeyCode == Keys.Left)
             {
@@ -145,30 +207,45 @@ namespace PongMasters
             if (ball.Left <= gametable.Left || ball.Right >= gametable.Right)
             {
                 ballXspeed = -ballXspeed;
+                PlaySoundEffect("Assets/Sounds/ball.mp3");
             }
 
-            // Player scores (if opponent misses)
+            // Player scores
             if (ball.Top <= gametable.Top)
             {
                 playerScore++;
-
                 playerPoints[playerScore - 1].Image = Image.FromFile("Assets/Images/point_player.png");
+                PlaySoundEffect("Assets/Sounds/playerwin.mp3");
 
-                // add small 3s break and opponent taunt before another round starts
-                // GameTimer.Stop;
                 ResetBall();
+
+                if (playerScore < 3)
+                {
+                    GameTimer.Stop();
+                    dialogueStep = 0;
+                    dialogueTimer.Interval = 2000;
+                    dialogueTimer.Tick += RoundDialogueTimer_Tick;
+                    dialogueTimer.Start();
+                }
             }
 
-            // Opponent scores (if player misses)
+            // Opponent scores
             if (ball.Bottom >= gametable.Bottom)
             {
                 opponentScore++;
-
                 opponentPoints[opponentScore - 1].Image = Image.FromFile($"Assets/Images/point_{GetOpponentName(opponentsWon)}.png");
+                PlaySoundEffect("Assets/Sounds/playerlose.mp3");
 
-                // add small 3s break and opponent taunt before another round starts
-                // GameTimer.Stop;
                 ResetBall();
+
+                if (opponentScore < 3)
+                {
+                    GameTimer.Stop();
+                    dialogueStep = 0;
+                    dialogueTimer.Interval = 1000;
+                    dialogueTimer.Tick += RoundDialogueTimer_Tick;
+                    dialogueTimer.Start();
+                }
             }
 
             // Opponent AI: Move towards ball
@@ -222,6 +299,8 @@ namespace PongMasters
             if (ball.Bounds.IntersectsWith(racket.Bounds))
             {
                 ballYspeed = -ballYspeed; // Reverse ball direction
+                PlaySoundEffect("Assets/Sounds/swing.mp3");
+
 
                 // Slight randomness to the bounce
                 ballXspeed = randomBall[random.Next(randomBall.Length)]; // Random index from 0 to 4
@@ -231,8 +310,11 @@ namespace PongMasters
 
         private void ResetBall()
         {
-            ball.Top = gametable.Height / 2;
-            ball.Left = gametable.Width / 2;
+            // Cannot divide by width/height only because gametable is not positioned at (0,0)
+            // --> Size can't specify a location
+            // 29 + (759 / 2) - (35 / 2)
+            ball.Top = gametable.Top + (gametable.Height / 2) - (ball.Height / 2);
+            ball.Left = gametable.Left + (gametable.Width / 2) - (ball.Width / 2);
 
             // Randomize ball direction
             ballXspeed = randomBall[random.Next(randomBall.Length)]; // Random index from 0 to 4
@@ -252,6 +334,7 @@ namespace PongMasters
         private void MatchEnd(string winner)
         {
             GameTimer.Stop();
+            musicPlayer.controls.stop();
             if (winner == "player")
             {
                 opponentsWon++;
