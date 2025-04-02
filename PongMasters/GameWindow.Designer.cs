@@ -67,7 +67,7 @@
             // 
             // GameTimer
             // 
-            this.GameTimer.Interval = 20;
+            this.GameTimer.Interval = 16;
             this.GameTimer.Tick += new System.EventHandler(this.GameTimerEvent);
             // 
             // pictureBox2

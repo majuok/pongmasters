@@ -16,18 +16,18 @@ namespace PongMasters
     {
         int ballXspeed = 6; // starting ball speed
         int ballYspeed = 6; // starting ball speed
-        int opponentSpeed = 8;
-        int playerSpeed;
+        int opponentSpeed = 10;
         int playerScore = 0; // int playerScore, opponentScore = 0
         int opponentScore = 0;
-        int opponentsWon, hitLimit;
+        int hitCount = 0;
+        int playerSpeed, opponentsWon, hitLimit, hitLimitStart, hitLimitEnd;
         private PictureBox[] opponentPoints;
         private PictureBox[] playerPoints;
         private Timer dialogueTimer;
         int dialogueStep = 0;
+        int dialogueNum;
         bool goLeft, goRight;
         int[] randomBall = new int[5];
-        //int[] randomOpponent = { 5, 6, 8, 9 };
         string[] dialogue;
         Random random = new Random();
         WindowsMediaPlayer sfxPlayer = new WindowsMediaPlayer();
@@ -59,8 +59,10 @@ namespace PongMasters
             switch (opponentsWon)
             {
                 case 0: // Mikko Virtanen
-                    randomBall = new int[] { 6, 7, 8, 9, 10 };
-                    hitLimit = random.Next(5, 16);
+                    randomBall = new int[] { 6, 7, 8, 9, 10 }; // One array randomizer vs. two variable randomizer
+                    hitLimitStart = 5;
+                    hitLimitEnd = 16;
+                    hitLimit = random.Next(hitLimitStart, hitLimitEnd);
                     playerSpeed = 8;
                     dialogue = new string[] { "Moro! Mites menee?", "Turha luulla, että päihität vanhan Suomen mestarin!", "Et kai sä tosissas luule pärjääväs?", "Haha! Eikö osu? Harjoittele vähän!", "Sanoinhan, ettei mua voi voittaa!", "Ei ollut sun päiväsi, juniori!", "Hävisinkö oikeesti?", "Pakko myöntää, sä pelasit hyvin!" };
                     opponentCard.Image = Image.FromFile("Assets/Images/card_mikko.png");
@@ -69,7 +71,9 @@ namespace PongMasters
                     break;
                 case 1: // Boris Ivanov
                     randomBall = new int[] { 8, 9, 10, 11, 12 };
-                    hitLimit = random.Next(8, 19);
+                    hitLimitStart = 8;
+                    hitLimitEnd = 19;
+                    hitLimit = random.Next(hitLimitStart, hitLimitEnd);
                     playerSpeed = 9;
                     dialogue = new string[] { "I do not play for fun. I play to destroy.", "You stand no chance against Russian precision.", "Is that all? I expected more resistance.", "Weak. Very weak.", "Victory is inevitable. Your effort was amusing.", "You never had a chance.", "This is unacceptable… how did you do that?", "You got lucky. It won't happen again." };
                     opponentCard.Image = Image.FromFile("Assets/Images/card_boris.png");
@@ -78,7 +82,9 @@ namespace PongMasters
                     break;
                 case 2: // Emiko Tanaka
                     randomBall = new int[] { 10, 11, 12, 13, 14 };
-                    hitLimit = random.Next(15, 26);
+                    hitLimitStart = 15;
+                    hitLimitEnd = 26;
+                    hitLimit = random.Next(hitLimitStart, hitLimitEnd);
                     playerSpeed = 10;
                     dialogue = new string[] { "I do not underestimate my opponents. Let’s see what you can do.", "A match should be like a haiku - precise and elegant.", "Your movements are too slow. Anticipate the ball.", "A true player adapts. Can you?", "A well-fought match. But victory is mine.", "You lack discipline. Train harder.", "Impressive. You are more skilled than I thought.", "This loss is a lesson. I will return stronger." };
                     opponentCard.Image = Image.FromFile("Assets/Images/card_emiko.png");
@@ -87,16 +93,20 @@ namespace PongMasters
                     break;
                 case 3: // Ace Carter
                     randomBall = new int[] { 12, 13, 14, 15, 16 };
-                    hitLimit = random.Next(18, 29);
+                    hitLimitStart = 18;
+                    hitLimitEnd = 29;
+                    hitLimit = random.Next(hitLimitStart, hitLimitEnd);
                     playerSpeed = 11;
-                    dialogue = new string[] { "Get ready for the main event, starring yours truly!", "They don’t call me ‘Ace’ for nothing!", "Oof! That was ugly. You sure you know how to play?", "I almost fell asleep waiting for that shot!", "A flawless performance, as expected!", "I’ll sign an autograph for you after this, kid!", "Wait… What?! That wasn’t supposed to happen!", "Alright, alright. Rematch, right now!" };
+                    dialogue = new string[] { "Get ready for the main event, starring yours truly!", "They don’t call me ‘Ace’ for nothing!", "I almost fell asleep waiting for that shot!", "Oof! That was ugly. You sure you know how to play?", "A flawless performance, as expected!", "I’ll sign an autograph for you after this, kid!", "Wait… What?! That wasn’t supposed to happen!", "Alright, alright. Rematch, right now!" };
                     opponentCard.Image = Image.FromFile("Assets/Images/card_ace.png");
                     opponentText.BackgroundImage = Image.FromFile("Assets/Images/textbox_ace.png");
                     racketOpponent.Image = Image.FromFile("Assets/Images/racket_ace.png");
                     break;
                 case 4: // Lin Shidong
                     randomBall = new int[] { 16, 17, 18, 19, 20 };
-                    hitLimit = random.Next(22, 33);
+                    hitLimitStart = 22;
+                    hitLimitEnd = 33;
+                    hitLimit = random.Next(hitLimitStart, hitLimitEnd);
                     playerSpeed = 12;
                     dialogue = new string[] { "I play for perfection. Let’s begin.", "Your reflexes will be tested.", "Predictable. I already knew you’d do that.", "Your technique is flawed. I see every weakness.", "Efficiency leads to victory. That is all.", "You were never in control of this match.", "...Interesting. I did not anticipate that outcome.", "You have earned my respect. Well played." };
                     opponentCard.Image = Image.FromFile("Assets/Images/card_lin.png");
@@ -105,7 +115,8 @@ namespace PongMasters
                     break;
             }
 
-            PlaySoundEffect("Assets/Sounds/crowd.mp3");
+            musicPlayer.URL = "Assets/Sounds/crowd.mp3";
+            musicPlayer.controls.play();
 
             dialogueTimer = new Timer
             {
@@ -123,20 +134,21 @@ namespace PongMasters
                 // After 2 seconds
                 case 0:
                     opponentDialogue.Text = dialogue[0];
-                    PlaySoundEffect("Assets/Sounds/taunt_male1.mp3");
+                    PlaySoundEffect($"Assets/Sounds/taunt_{GetOpponentName(opponentsWon)}{GetDialogueLength(0)}.mp3");
                     dialogueTimer.Interval = 4000;
                     break;
                 // After 6 seconds
                 case 1:
                     opponentDialogue.Text = dialogue[1];
-                    PlaySoundEffect("Assets/Sounds/taunt_male1.mp3");
+                    PlaySoundEffect($"Assets/Sounds/taunt_{GetOpponentName(opponentsWon)}{GetDialogueLength(1)}.mp3");
                     break;
                 // After 10 seconds
                 case 2:
                     opponentDialogue.Text = "";
-                    musicPlayer.URL = "Assets/Sounds/opponent1.mp3";
+                    musicPlayer.URL = $"Assets/Sounds/music_{GetOpponentName(opponentsWon)}.mp3";
                     musicPlayer.settings.setMode("loop", true);
                     musicPlayer.controls.play();
+                    dialogueTimer.Tick -= IntroDialogueTimer_Tick;
                     dialogueTimer.Stop();
                     GameTimer.Start();
                     return;
@@ -150,17 +162,47 @@ namespace PongMasters
             {
                 // After 1 second
                 case 0:
-                    opponentDialogue.Text = dialogue[2]; // or 3
-                    PlaySoundEffect("Assets/Sounds/taunt_male1.mp3");
-                    dialogueTimer.Interval = 3000;
+                    opponentDialogue.Text = dialogue[dialogueNum];
+                    PlaySoundEffect($"Assets/Sounds/taunt_{GetOpponentName(opponentsWon)}{GetDialogueLength(dialogueNum)}.mp3");
+                    dialogueTimer.Interval = 2000;
                     break;
-                // After 4 seconds
+                // After 3 seconds
                 case 1:
-                    GameTimer.Start();
-                    dialogueTimer.Stop();
                     opponentDialogue.Text = "";
-                    PlaySoundEffect("Assets/Sounds/roundstart.mp3");
+                    PlaySoundEffect("Assets/Sounds/begin_round.mp3");
+                    hitCount = 0;
+                    GameTimer.Start();
+                    dialogueTimer.Tick -= RoundDialogueTimer_Tick;
+                    dialogueTimer.Stop();
+                    return;
+            }
+            dialogueStep++;
+        }
+
+        private void OutroDialogueTimer_Tick(object sender, EventArgs e)
+        {
+            switch (dialogueStep)
+            {
+                // After 1 second
+                case 0:
+                    musicPlayer.URL = "Assets/Sounds/crowd.mp3";
+                    musicPlayer.controls.play();
+                    opponentDialogue.Text = dialogue[dialogueNum];
+                    PlaySoundEffect($"Assets/Sounds/taunt_{GetOpponentName(opponentsWon)}{GetDialogueLength(dialogueNum)}.mp3");
+                    dialogueTimer.Interval = 2000;
                     break;
+                // After 3 seconds
+                case 1:
+                    dialogueNum++;
+                    opponentDialogue.Text = dialogue[dialogueNum];
+                    PlaySoundEffect($"Assets/Sounds/taunt_{GetOpponentName(opponentsWon)}{GetDialogueLength(dialogueNum)}.mp3");
+                    break;
+                // After 5 seconds
+                case 2:
+                    dialogueTimer.Tick -= OutroDialogueTimer_Tick;
+                    dialogueTimer.Stop();
+                    this.Close();
+                    return;
             }
             dialogueStep++;
         }
@@ -173,28 +215,16 @@ namespace PongMasters
 
         private void KeyIsDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Right)
-            {
-                goRight = true;
-                // maybe add paddle movement sounds
-            }
-            if (e.KeyCode == Keys.Left)
-            {
-                goLeft = true;
-            }
+            // maybe add paddle movement sounds
+            if (e.KeyCode == Keys.Right) goRight = true;
+            if (e.KeyCode == Keys.Left) goLeft = true;
         }
 
         private void KeyIsUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Right)
-            {
-                goRight = false;
-                // maybe stop paddle movement sounds
-            }
-            if (e.KeyCode == Keys.Left)
-            {
-                goLeft = false;
-            }
+            // maybe stop paddle movement sounds
+            if (e.KeyCode == Keys.Right) goRight = false;
+            if (e.KeyCode == Keys.Left) goLeft = false;
         }
 
         private void GameTimerEvent(object sender, EventArgs e)
@@ -214,6 +244,7 @@ namespace PongMasters
             if (ball.Top <= gametable.Top)
             {
                 playerScore++;
+                hitLimit = random.Next(hitLimitStart, hitLimitEnd);
                 playerPoints[playerScore - 1].Image = Image.FromFile("Assets/Images/point_player.png");
                 PlaySoundEffect("Assets/Sounds/playerwin.mp3");
 
@@ -222,9 +253,11 @@ namespace PongMasters
                 if (playerScore < 3)
                 {
                     GameTimer.Stop();
+                    dialogueNum = 2;
                     dialogueStep = 0;
-                    dialogueTimer.Interval = 2000;
+
                     dialogueTimer.Tick += RoundDialogueTimer_Tick;
+                    dialogueTimer.Interval = 1000;
                     dialogueTimer.Start();
                 }
             }
@@ -241,9 +274,11 @@ namespace PongMasters
                 if (opponentScore < 3)
                 {
                     GameTimer.Stop();
+                    dialogueNum = 3;
                     dialogueStep = 0;
-                    dialogueTimer.Interval = 1000;
+
                     dialogueTimer.Tick += RoundDialogueTimer_Tick;
+                    dialogueTimer.Interval = 1000;
                     dialogueTimer.Start();
                 }
             }
@@ -292,19 +327,33 @@ namespace PongMasters
             {
                 MatchEnd("player");
             }
+
+            ball.Invalidate();  // Forces redraw
         }
 
         private void CheckCollision(PictureBox ball, PictureBox racket)
         {
             if (ball.Bounds.IntersectsWith(racket.Bounds))
             {
-                ballYspeed = -ballYspeed; // Reverse ball direction
                 PlaySoundEffect("Assets/Sounds/swing.mp3");
 
+                // Get a new random speed from the predefined list
+                int newYspeed = randomBall[random.Next(randomBall.Length)];
+                // Ensure the direction is always inverted
+                ballYspeed = -Math.Abs(newYspeed) * Math.Sign(ballYspeed);
 
-                // Slight randomness to the bounce
+                // Add slight randomness to X-speed
                 ballXspeed = randomBall[random.Next(randomBall.Length)]; // Random index from 0 to 4
                 if (random.Next(0, 2) == 0) ballXspeed = -ballXspeed; // 50% chance to change direction
+            }
+
+            if (ball.Bounds.IntersectsWith(racketOpponent.Bounds))
+            {
+                hitCount++;
+                if (hitCount >= hitLimit)
+                {
+                    // opponent paddle starts to get away from the ball
+                }
             }
         }
 
@@ -331,24 +380,39 @@ namespace PongMasters
             return names[index];
         }
 
+        private string GetDialogueLength(int dialogueNum)
+        {
+            int length = dialogue[dialogueNum].Length;
+
+            if (length <= 25) return "1";
+            if (length <= 40) return "2";
+            if (length <= 60) return "3";
+            return "4";
+        }
+
         private void MatchEnd(string winner)
         {
             GameTimer.Stop();
             musicPlayer.controls.stop();
+            dialogueStep = 0;
+            dialogueTimer.Tick += OutroDialogueTimer_Tick;
+            dialogueTimer.Interval = 1000;
             if (winner == "player")
             {
                 opponentsWon++;
                 SaveProgress(opponentsWon);
-                // add a short dialogue and timer so that the window won't instantly close
-                this.Close();
+
+                dialogueNum = 6;
+                dialogueTimer.Start();
             }
 
             else if (winner == "opponent")
             {
                 opponentsWon = 0;
                 SaveProgress(opponentsWon);
-                // add a short dialogue and timer so that the window won't instantly close
-                this.Close();
+
+                dialogueNum = 4;
+                dialogueTimer.Start();
             }
         }
 
