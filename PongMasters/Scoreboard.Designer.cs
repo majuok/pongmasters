@@ -170,7 +170,7 @@
             this.FifthCountry.BackColor = System.Drawing.Color.Transparent;
             this.FifthCountry.Font = new System.Drawing.Font("Press Start 2P", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FifthCountry.ForeColor = System.Drawing.Color.White;
-            this.FifthCountry.Location = new System.Drawing.Point(467, 347);
+            this.FifthCountry.Location = new System.Drawing.Point(467, 348);
             this.FifthCountry.Name = "FifthCountry";
             this.FifthCountry.Size = new System.Drawing.Size(183, 33);
             this.FifthCountry.TabIndex = 10;
@@ -206,7 +206,7 @@
             this.SecondCountry.BackColor = System.Drawing.Color.Transparent;
             this.SecondCountry.Font = new System.Drawing.Font("Press Start 2P", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SecondCountry.ForeColor = System.Drawing.Color.White;
-            this.SecondCountry.Location = new System.Drawing.Point(467, 156);
+            this.SecondCountry.Location = new System.Drawing.Point(467, 155);
             this.SecondCountry.Name = "SecondCountry";
             this.SecondCountry.Size = new System.Drawing.Size(87, 33);
             this.SecondCountry.TabIndex = 7;
@@ -218,7 +218,7 @@
             this.FirstCountry.BackColor = System.Drawing.Color.Transparent;
             this.FirstCountry.Font = new System.Drawing.Font("Press Start 2P", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FirstCountry.ForeColor = System.Drawing.Color.White;
-            this.FirstCountry.Location = new System.Drawing.Point(467, 88);
+            this.FirstCountry.Location = new System.Drawing.Point(467, 90);
             this.FirstCountry.Name = "FirstCountry";
             this.FirstCountry.Size = new System.Drawing.Size(135, 33);
             this.FirstCountry.TabIndex = 6;
@@ -228,8 +228,8 @@
             // 
             this.SixthName.AutoSize = true;
             this.SixthName.BackColor = System.Drawing.Color.Transparent;
-            this.SixthName.Font = new System.Drawing.Font("Press Start 2P", 18F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SixthName.ForeColor = System.Drawing.Color.LimeGreen;
+            this.SixthName.Font = new System.Drawing.Font("Press Start 2P", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SixthName.ForeColor = System.Drawing.Color.White;
             this.SixthName.Location = new System.Drawing.Point(111, 412);
             this.SixthName.Name = "SixthName";
             this.SixthName.Size = new System.Drawing.Size(111, 33);
@@ -242,7 +242,7 @@
             this.FifthName.BackColor = System.Drawing.Color.Transparent;
             this.FifthName.Font = new System.Drawing.Font("Press Start 2P", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FifthName.ForeColor = System.Drawing.Color.White;
-            this.FifthName.Location = new System.Drawing.Point(111, 347);
+            this.FifthName.Location = new System.Drawing.Point(110, 348);
             this.FifthName.Name = "FifthName";
             this.FifthName.Size = new System.Drawing.Size(351, 33);
             this.FifthName.TabIndex = 4;
@@ -278,7 +278,7 @@
             this.SecondName.BackColor = System.Drawing.Color.Transparent;
             this.SecondName.Font = new System.Drawing.Font("Press Start 2P", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SecondName.ForeColor = System.Drawing.Color.White;
-            this.SecondName.Location = new System.Drawing.Point(111, 156);
+            this.SecondName.Location = new System.Drawing.Point(110, 155);
             this.SecondName.Name = "SecondName";
             this.SecondName.Size = new System.Drawing.Size(255, 33);
             this.SecondName.TabIndex = 1;
@@ -290,7 +290,7 @@
             this.FirstName.BackColor = System.Drawing.Color.Transparent;
             this.FirstName.Font = new System.Drawing.Font("Press Start 2P", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FirstName.ForeColor = System.Drawing.Color.White;
-            this.FirstName.Location = new System.Drawing.Point(111, 88);
+            this.FirstName.Location = new System.Drawing.Point(111, 90);
             this.FirstName.Name = "FirstName";
             this.FirstName.Size = new System.Drawing.Size(279, 33);
             this.FirstName.TabIndex = 0;

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
-using WMPLib; // for music
+using WMPLib; // for sounds
 
 namespace PongMasters
 {
@@ -52,7 +52,6 @@ namespace PongMasters
             opponentPoint1.Image = opponentPoint2.Image = opponentPoint3.Image = Image.FromFile("Assets/Images/point_empty.png");
             playerPoint1.Image = playerPoint2.Image = playerPoint3.Image = Image.FromFile("Assets/Images/point_empty2.png");
 
-            
             ball.Top = gametable.Top + (gametable.Height / 2) - (ball.Height / 2);
             ball.Left = gametable.Left + (gametable.Width / 2) - (ball.Width / 2);
 
@@ -115,7 +114,8 @@ namespace PongMasters
                     break;
             }
 
-            musicPlayer.URL = "Assets/Sounds/crowd.mp3";
+            musicPlayer.URL = "Assets/Sounds/begin_match.mp3";
+            musicPlayer.settings.volume = 33;
             musicPlayer.controls.play();
 
             dialogueTimer = new Timer
@@ -125,6 +125,8 @@ namespace PongMasters
             dialogueTimer.Tick += IntroDialogueTimer_Tick; // Run the function with every tick
             dialogueTimer.Start();
             // Player can always move his paddle but the ball starts moving only now
+
+            this.FormClosing += GameWindow_FormClosing;
         }
 
         private void IntroDialogueTimer_Tick(object sender, EventArgs e)
@@ -164,12 +166,14 @@ namespace PongMasters
                 case 0:
                     opponentDialogue.Text = dialogue[dialogueNum];
                     PlaySoundEffect($"Assets/Sounds/taunt_{GetOpponentName(opponentsWon)}{GetDialogueLength(dialogueNum)}.mp3");
-                    dialogueTimer.Interval = 2000;
                     break;
-                // After 3 seconds
+                // After 2 seconds
                 case 1:
-                    opponentDialogue.Text = "";
                     PlaySoundEffect("Assets/Sounds/begin_round.mp3");
+                    break;
+                // After 3seconds
+                case 2:
+                    opponentDialogue.Text = "";
                     hitCount = 0;
                     GameTimer.Start();
                     dialogueTimer.Tick -= RoundDialogueTimer_Tick;
@@ -185,19 +189,19 @@ namespace PongMasters
             {
                 // After 1 second
                 case 0:
-                    musicPlayer.URL = "Assets/Sounds/crowd.mp3";
+                    musicPlayer.URL = "Assets/Sounds/begin_match.mp3";
                     musicPlayer.controls.play();
                     opponentDialogue.Text = dialogue[dialogueNum];
                     PlaySoundEffect($"Assets/Sounds/taunt_{GetOpponentName(opponentsWon)}{GetDialogueLength(dialogueNum)}.mp3");
-                    dialogueTimer.Interval = 2000;
+                    dialogueTimer.Interval = 3000;
                     break;
-                // After 3 seconds
+                // After 4 seconds
                 case 1:
                     dialogueNum++;
                     opponentDialogue.Text = dialogue[dialogueNum];
                     PlaySoundEffect($"Assets/Sounds/taunt_{GetOpponentName(opponentsWon)}{GetDialogueLength(dialogueNum)}.mp3");
                     break;
-                // After 5 seconds
+                // After 7 seconds
                 case 2:
                     dialogueTimer.Tick -= OutroDialogueTimer_Tick;
                     dialogueTimer.Stop();
@@ -210,6 +214,7 @@ namespace PongMasters
         void PlaySoundEffect(string soundFile)
         {
             sfxPlayer.URL = soundFile;
+            sfxPlayer.settings.volume = 33;
             sfxPlayer.controls.play();
         }
 
@@ -237,7 +242,7 @@ namespace PongMasters
             if (ball.Left <= gametable.Left || ball.Right >= gametable.Right)
             {
                 ballXspeed = -ballXspeed;
-                PlaySoundEffect("Assets/Sounds/ball.mp3");
+                PlaySoundEffect("Assets/Sounds/ball2.mp3");
             }
 
             // Player scores
@@ -246,7 +251,7 @@ namespace PongMasters
                 playerScore++;
                 hitLimit = random.Next(hitLimitStart, hitLimitEnd);
                 playerPoints[playerScore - 1].Image = Image.FromFile("Assets/Images/point_player.png");
-                PlaySoundEffect("Assets/Sounds/playerwin.mp3");
+                PlaySoundEffect("Assets/Sounds/hit_opponent.mp3");
 
                 ResetBall();
 
@@ -267,7 +272,7 @@ namespace PongMasters
             {
                 opponentScore++;
                 opponentPoints[opponentScore - 1].Image = Image.FromFile($"Assets/Images/point_{GetOpponentName(opponentsWon)}.png");
-                PlaySoundEffect("Assets/Sounds/playerlose.mp3");
+                PlaySoundEffect("Assets/Sounds/hit_player1.mp3");
 
                 ResetBall();
 
@@ -393,26 +398,27 @@ namespace PongMasters
         private void MatchEnd(string winner)
         {
             GameTimer.Stop();
+            PlaySoundEffect("Assets/Sounds/knockdown.mp3");
             musicPlayer.controls.stop();
             dialogueStep = 0;
             dialogueTimer.Tick += OutroDialogueTimer_Tick;
             dialogueTimer.Interval = 1000;
             if (winner == "player")
             {
-                opponentsWon++;
-                SaveProgress(opponentsWon);
-
                 dialogueNum = 6;
                 dialogueTimer.Start();
+
+                opponentsWon++;
+                SaveProgress(opponentsWon);
             }
 
             else if (winner == "opponent")
             {
-                opponentsWon = 0;
-                SaveProgress(opponentsWon);
-
                 dialogueNum = 4;
                 dialogueTimer.Start();
+
+                opponentsWon = 0;
+                SaveProgress(opponentsWon);
             }
         }
 
@@ -443,6 +449,24 @@ namespace PongMasters
                 return int.Parse(File.ReadAllText("progress.txt"));
             }
             return 0; // start from 0 if no save file exists
+        }
+
+        private void GameWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            dialogueTimer.Stop();
+            GameTimer.Stop();
+            DisposeMediaPlayer(musicPlayer);
+            DisposeMediaPlayer(sfxPlayer);
+        }
+
+        private void DisposeMediaPlayer(WindowsMediaPlayer player)
+        {
+            if (player != null)
+            {
+                player.controls.stop();
+                player.close();
+                player = null; // Prevent memory leaks
+            }
         }
     }
 }
