@@ -14,15 +14,25 @@ namespace PongMasters
 {
     public partial class Scoreboard : Form
     {
+        int opponentsWon;
+        int opponentsWonPrev;
         WindowsMediaPlayer sfxPlayer = new WindowsMediaPlayer();
         WindowsMediaPlayer musicPlayer = new WindowsMediaPlayer();
         public Scoreboard()
         {
             InitializeComponent();
+            opponentsWon = LoadProgress();
+            if (opponentsWon < 0 || opponentsWon > 5)
+            {
+                opponentsWon = 0;
+                SaveProgress(opponentsWon);
+            }
+            opponentsWonPrev = opponentsWon;
             this.Activated += RefreshScoreboard;
 
             buttonPlay.Image = Image.FromFile("Assets/Images/button_play.png");
             buttonExit.Image = Image.FromFile("Assets/Images/button_exit.png");
+            musicPlayer.settings.volume = 33;
 
             this.FormClosing += Scoreboard_FormClosing;
         }
@@ -43,13 +53,15 @@ namespace PongMasters
 
         private void RefreshScoreboard(object sender, EventArgs e)
         {
-            int opponentsWon;
             opponentsWon = LoadProgress();
             if (opponentsWon < 0 || opponentsWon > 5)
             {
                 opponentsWon = 0;
                 SaveProgress(opponentsWon);
             }
+
+            UpdateInfoTextAndMusic();
+            opponentsWonPrev = opponentsWon;
 
             // Define names and countries for each opponent
             (string Name, string Country)[] opponents =
@@ -93,6 +105,32 @@ namespace PongMasters
             }
         }
 
+        private void UpdateInfoTextAndMusic()
+        {
+            if (opponentsWon > opponentsWonPrev && opponentsWon < 5)
+            {
+                infoText.Text = $"Voitit ottelun!\nEnään {5 - opponentsWon} vastustajaa jäljellä.";
+                musicPlayer.URL = "Assets/Sounds/music_game_win.mp3";
+            }
+            else if (opponentsWon < opponentsWonPrev)
+            {
+                infoText.Text = "Hävisit ottelun!\nJoudut aloittamaan pelin alusta.";
+                musicPlayer.URL = "Assets/Sounds/music_game_lose.mp3";
+            }
+            else if (opponentsWon == 5)
+            {
+                infoText.Text = "Voitit kilpailun!\nOnneksi olkoon!";
+                musicPlayer.URL = "Assets/Sounds/music_game_end.mp3";
+            }
+            else
+            {
+                infoText.Text = "Päihitä viisi\nvastustajaa voittaaksesi!";
+                return;
+            }
+
+            musicPlayer.controls.play();
+        }
+
         void PlaySoundEffect(string soundFile)
         {
             sfxPlayer.URL = soundFile;
@@ -129,6 +167,7 @@ namespace PongMasters
         private void buttonPlay_Click(object sender, EventArgs e)
         {
             PlaySoundEffect("Assets/Sounds/menu_press_play.mp3");
+            musicPlayer.controls.stop();
             GameWindow gameWindow = new GameWindow();
             gameWindow.StartPosition = FormStartPosition.Manual;
             gameWindow.Location = this.Location;

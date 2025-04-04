@@ -15,13 +15,11 @@ C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\Assets\Images\butt
 C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\Assets\Images\button_play.png
 C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\Assets\Images\button_play_hover.png
 C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\Assets\Images\card_ace.png
-C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\Assets\Images\card_ace2.png
 C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\Assets\Images\card_boris.png
 C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\Assets\Images\card_emiko.png
 C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\Assets\Images\card_lin.png
 C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\Assets\Images\card_mikko.png
 C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\Assets\Images\point_ace.png
-C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\Assets\Images\point_ace2.png
 C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\Assets\Images\point_boris.png
 C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\Assets\Images\point_emiko.png
 C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\Assets\Images\point_empty.png
@@ -35,7 +33,6 @@ C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\Assets\Images\rack
 C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\Assets\Images\racket_lin.png
 C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\Assets\Images\racket_mikko.png
 C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\Assets\Images\textbox_ace.png
-C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\Assets\Images\textbox_ace2.png
 C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\Assets\Images\textbox_boris.png
 C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\Assets\Images\textbox_emiko.png
 C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\Assets\Images\textbox_lin.png
@@ -117,3 +114,9 @@ C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\Assets\Sounds\taun
 C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\Assets\Sounds\music_mikko.mp3
 C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\Assets\Sounds\music_main_menu.mp3
 C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\Assets\Sounds\begin_round.mp3
+C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\Assets\Sounds\music_game_end.mp3
+C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\Assets\Sounds\music_game_lose.mp3
+C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\Assets\Sounds\music_game_win.mp3
+C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\Assets\Sounds\music_ace.mp3
+C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\Assets\Sounds\music_emiko.mp3
+C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\Assets\Sounds\music_lin.mp3

@@ -300,10 +300,10 @@
             // 
             this.infoText.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.infoText.Font = new System.Drawing.Font("Press Start 2P", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.infoText.Location = new System.Drawing.Point(3, 132);
+            this.infoText.Location = new System.Drawing.Point(31, 132);
             this.infoText.Margin = new System.Windows.Forms.Padding(3, 0, 3, 5);
             this.infoText.Name = "infoText";
-            this.infoText.Size = new System.Drawing.Size(828, 55);
+            this.infoText.Size = new System.Drawing.Size(772, 55);
             this.infoText.TabIndex = 3;
             this.infoText.Text = "Päihitä viisi\r\nvastustajaa voittaaksesi!";
             this.infoText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

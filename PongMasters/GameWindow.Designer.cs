@@ -201,9 +201,9 @@
             // 
             this.racketPlayer.BackColor = System.Drawing.Color.Black;
             this.racketPlayer.Image = global::PongMasters.Properties.Resources.racket_player1;
-            this.racketPlayer.Location = new System.Drawing.Point(452, 735);
+            this.racketPlayer.Location = new System.Drawing.Point(456, 740);
             this.racketPlayer.Name = "racketPlayer";
-            this.racketPlayer.Size = new System.Drawing.Size(125, 35);
+            this.racketPlayer.Size = new System.Drawing.Size(120, 35);
             this.racketPlayer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.racketPlayer.TabIndex = 4;
             this.racketPlayer.TabStop = false;
@@ -211,9 +211,9 @@
             // racketOpponent
             // 
             this.racketOpponent.BackColor = System.Drawing.Color.Black;
-            this.racketOpponent.Location = new System.Drawing.Point(452, 44);
+            this.racketOpponent.Location = new System.Drawing.Point(456, 43);
             this.racketOpponent.Name = "racketOpponent";
-            this.racketOpponent.Size = new System.Drawing.Size(125, 35);
+            this.racketOpponent.Size = new System.Drawing.Size(120, 35);
             this.racketOpponent.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.racketOpponent.TabIndex = 3;
             this.racketOpponent.TabStop = false;
@@ -222,7 +222,7 @@
             // 
             this.ball.BackColor = System.Drawing.Color.Black;
             this.ball.Image = global::PongMasters.Properties.Resources.ball2;
-            this.ball.Location = new System.Drawing.Point(496, 391);
+            this.ball.Location = new System.Drawing.Point(499, 391);
             this.ball.Name = "ball";
             this.ball.Size = new System.Drawing.Size(35, 35);
             this.ball.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -241,7 +241,7 @@
             // 
             // GameWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(17F, 23F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(200)))), ((int)(((byte)(163)))));
             this.ClientSize = new System.Drawing.Size(834, 811);
