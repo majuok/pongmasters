@@ -9,23 +9,23 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
 using WMPLib;
-//using System.Drawing.Drawing2D;
+using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 
 namespace PongMasters
 {
     public partial class GameWindow : Form
     {
-        //int ballX = 499;
-        //int ballY = 391;
-        //int ballSize = 35;
+        int ballX = 499;
+        int ballY = 391;
+        int ballSize = 35;
         int ballStartSpeed;
         int ballXspeed;
         int ballYspeed;
         int playerScore = 0; // int playerScore, opponentScore = 0
         int opponentScore = 0;
         int hitCount = 0;
-        int playerSpeed, opponentSpeed, opponentsWon, hitLimit, hitLimitStart, hitLimitEnd;
+        int playerSpeed, opponentSpeed, opponentsWon, opponentsWonCurrently, hitLimit, hitLimitStart, hitLimitEnd;
         private PictureBox[] opponentPoints;
         private PictureBox[] playerPoints;
         private Timer dialogueTimer;
@@ -53,8 +53,9 @@ namespace PongMasters
                 SaveProgress(opponentsWon);
                 // After game completion show how many rounds the player lost during his/her climb to the top
             }
+            opponentsWonCurrently = opponentsWon;
 
-            //gametable.Paint += Gametable_Paint;
+            gametable.Paint += Gametable_Paint;
 
             opponentPoints = new PictureBox[] { opponentPoint1, opponentPoint2, opponentPoint3 };
             playerPoints = new PictureBox[] { playerPoint1, playerPoint2, playerPoint3 };
@@ -62,10 +63,9 @@ namespace PongMasters
             opponentPoint1.Image = opponentPoint2.Image = opponentPoint3.Image = Image.FromFile("Assets/Images/point_empty.png");
             playerPoint1.Image = playerPoint2.Image = playerPoint3.Image = Image.FromFile("Assets/Images/point_empty2.png");
 
-            ball.Top = gametable.Top + (gametable.Height / 2) - (ball.Height / 2);
-            ball.Left = gametable.Left + (gametable.Width / 2) - (ball.Width / 2);
-            //ballY = gametable.Top + (gametable.Height / 2) - (ball.Height / 2);
-            //ballX = gametable.Left + (gametable.Width / 2) - (ball.Width / 2);
+            // Centering ball
+            ballX = gametable.Width / 2 - ballSize / 2;
+            ballY = gametable.Height / 2 - ballSize / 2;
 
             switch (opponentsWon)
             {
@@ -134,7 +134,8 @@ namespace PongMasters
             }
 
             ballXspeed = ballStartSpeed;
-            ballYspeed = ballStartSpeed;
+            if (random.Next(0, 2) == 0) ballXspeed = -ballXspeed; // 50% chance to start going to the left instead
+            ballYspeed = -ballStartSpeed;
 
             opponentSpeed = Math.Abs(ballXspeed);
 
@@ -159,18 +160,18 @@ namespace PongMasters
                 // After 2 seconds
                 case 0:
                     opponentDialogue.Text = dialogue[0];
-                    PlaySoundEffect($"Assets/Sounds/taunt_{GetOpponentName(opponentsWon)}{GetDialogueLength(0)}.mp3");
+                    PlaySoundEffect($"Assets/Sounds/taunt_{GetOpponentName(opponentsWonCurrently)}{GetDialogueLength(0)}.mp3");
                     dialogueTimer.Interval = 4000;
                     break;
                 // After 6 seconds
                 case 1:
                     opponentDialogue.Text = dialogue[1];
-                    PlaySoundEffect($"Assets/Sounds/taunt_{GetOpponentName(opponentsWon)}{GetDialogueLength(1)}.mp3");
+                    PlaySoundEffect($"Assets/Sounds/taunt_{GetOpponentName(opponentsWonCurrently)}{GetDialogueLength(1)}.mp3");
                     break;
                 // After 10 seconds
                 case 2:
                     opponentDialogue.Text = "";
-                    musicPlayer.URL = $"Assets/Sounds/music_{GetOpponentName(opponentsWon)}.mp3";
+                    musicPlayer.URL = $"Assets/Sounds/music_{GetOpponentName(opponentsWonCurrently)}.mp3";
                     musicPlayer.settings.setMode("loop", true);
                     musicPlayer.controls.play();
                     dialogueTimer.Tick -= IntroDialogueTimer_Tick;
@@ -188,7 +189,7 @@ namespace PongMasters
                 // After 1 second
                 case 0:
                     opponentDialogue.Text = dialogue[dialogueNum];
-                    PlaySoundEffect($"Assets/Sounds/taunt_{GetOpponentName(opponentsWon)}{GetDialogueLength(dialogueNum)}.mp3");
+                    PlaySoundEffect($"Assets/Sounds/taunt_{GetOpponentName(opponentsWonCurrently)}{GetDialogueLength(dialogueNum)}.mp3");
                     break;
                 // After 2 seconds
                 case 1:
@@ -199,8 +200,6 @@ namespace PongMasters
                     opponentDialogue.Text = "";
                     hitCount = 0;
                     opponentAvoiding = false;
-                    ballXspeed = ballStartSpeed;
-                    ballYspeed = Math.Sign(ballYspeed) * ballStartSpeed; // Math.Sign returns -1 or 1
                     GameTimer.Start();
                     dialogueTimer.Tick -= RoundDialogueTimer_Tick;
                     dialogueTimer.Stop();
@@ -218,14 +217,14 @@ namespace PongMasters
                     musicPlayer.URL = "Assets/Sounds/begin_match.mp3";
                     musicPlayer.controls.play();
                     opponentDialogue.Text = dialogue[dialogueNum];
-                    PlaySoundEffect($"Assets/Sounds/taunt_{GetOpponentName(opponentsWon)}{GetDialogueLength(dialogueNum)}.mp3");
+                    PlaySoundEffect($"Assets/Sounds/taunt_{GetOpponentName(opponentsWonCurrently)}{GetDialogueLength(dialogueNum)}.mp3");
                     dialogueTimer.Interval = 3000;
                     break;
                 // After 4 seconds
                 case 1:
                     dialogueNum++;
                     opponentDialogue.Text = dialogue[dialogueNum];
-                    PlaySoundEffect($"Assets/Sounds/taunt_{GetOpponentName(opponentsWon)}{GetDialogueLength(dialogueNum)}.mp3");
+                    PlaySoundEffect($"Assets/Sounds/taunt_{GetOpponentName(opponentsWonCurrently)}{GetDialogueLength(dialogueNum)}.mp3");
                     break;
                 // After 7 seconds
                 case 2:
@@ -258,22 +257,28 @@ namespace PongMasters
 
         private void GameTimerEvent(object sender, EventArgs e)
         {
-            // Move the ball
-            ball.Top -= ballYspeed;
-            ball.Left -= ballXspeed;
+            // Move the ball with every tick
+            ballX += ballXspeed;
+            ballY += ballYspeed;
 
-            //ballX += ballXspeed;
-            //ballY += ballYspeed;
-
-            // Ball collision with walls
-            if (ball.Left <= gametable.Left || ball.Right >= gametable.Right)
+            // Ball collision with left wall (separated wall logic to prevent bugs)
+            if (ballX <= 0)
             {
-                ballXspeed = -ballXspeed;
+                ballX = 0; // snap to wall edge
+                ballXspeed = Math.Abs(ballXspeed); // always bounce to the right
+                PlaySoundEffect("Assets/Sounds/ball2.mp3");
+            }
+
+            // Ball collision with right wall (separated wall logic to prevent bugs)
+            if (ballX + ballSize >= gametable.Width)
+            {
+                ballX = gametable.Width - ballSize; // snap to wall edge
+                ballXspeed = -Math.Abs(ballXspeed); // always bounce to the left
                 PlaySoundEffect("Assets/Sounds/ball2.mp3");
             }
 
             // Player scores
-            if (ball.Top <= gametable.Top)
+            if (ballY <= 0)
             {
                 playerScore++;
                 playerScoredLast = true;
@@ -296,11 +301,11 @@ namespace PongMasters
             }
 
             // Opponent scores
-            if (ball.Bottom >= gametable.Bottom)
+            if (ballY + ballSize >= gametable.Height)
             {
                 opponentScore++;
                 playerScoredLast = false;
-                opponentPoints[opponentScore - 1].Image = Image.FromFile($"Assets/Images/point_{GetOpponentName(opponentsWon)}.png");
+                opponentPoints[opponentScore - 1].Image = Image.FromFile($"Assets/Images/point_{GetOpponentName(opponentsWonCurrently)}.png");
                 PlaySoundEffect("Assets/Sounds/hit_player1.mp3");
 
                 ResetBall();
@@ -317,22 +322,28 @@ namespace PongMasters
                 }
             }
 
+            // Check collisions
+            CheckPlayerCollision();
+            CheckOpponentCollision();
+
+            //Console.WriteLine($"OpponentX: {racketOpponent.Left}, BallX: {ballX}, Speed: {opponentSpeed}");
+
             // Opponent AI: Move towards ball
             if (!opponentAvoiding)
             {
                 // Normal tracking logic
-                if (ball.Left + ball.Width / 2 > racketOpponent.Left + racketOpponent.Width / 2)
+                if (ballXspeed > 0)
                     racketOpponent.Left += opponentSpeed;
-                else if (ball.Left + ball.Width / 2 < racketOpponent.Left + racketOpponent.Width / 2)
+                else if (ballXspeed < 0)
                     racketOpponent.Left -= opponentSpeed;
             }
             else
             {
                 // Move away from the ball instead
-                if (ball.Left + ball.Width / 2 > racketOpponent.Left + racketOpponent.Width / 2)
-                    racketOpponent.Left -= opponentSpeed;
-                else if (ball.Left + ball.Width / 2 < racketOpponent.Left + racketOpponent.Width / 2)
+                if (ballXspeed < 0)
                     racketOpponent.Left += opponentSpeed;
+                else if (ballXspeed > 0)
+                    racketOpponent.Left -= opponentSpeed;
             }
 
             // Ensure player paddle stays within gametable
@@ -356,10 +367,6 @@ namespace PongMasters
                 racketOpponent.Left = gametable.Right - racketOpponent.Width;
             }
 
-            // Check collisions
-            CheckCollision(ball, racketPlayer);
-            CheckCollision(ball, racketOpponent);
-
             // Check match end condition
             if (opponentScore >= 3)
             {
@@ -370,20 +377,24 @@ namespace PongMasters
                 MatchEnd("player");
             }
 
-            ball.Invalidate(); // Forces redraw
-            //gametable.Invalidate();
+            gametable.Invalidate(); // redraw gametable every tick
         }
 
-        private void CheckCollision(PictureBox ball, PictureBox racket)
+        private void CheckPlayerCollision()
         {
-            if (ball.Bounds.IntersectsWith(racket.Bounds))
+            Rectangle ballRect = new Rectangle(ballX, ballY, ballSize, ballSize);
+
+            // Translate player paddle bounds relative to gametable
+            Rectangle playerRect = racketPlayer.Bounds;
+            playerRect.Offset(-gametable.Left, -gametable.Top);
+
+            if (ballRect.IntersectsWith(playerRect))
             {
                 PlaySoundEffect("Assets/Sounds/swing.mp3");
 
-                // Get a new random y-speed from the predefined list
+                // Get a new random y-speed
                 int newYspeed = randomBall[random.Next(randomBall.Length)];
-                // Ensure the direction is always inverted
-                ballYspeed = -Math.Abs(newYspeed) * Math.Sign(ballYspeed);
+                ballYspeed = -Math.Abs(newYspeed); // Always bounce upward (prevents the ball from getting stuck inside paddle)
 
                 // Add slight randomness to X-speed
                 ballXspeed = randomBall[random.Next(randomBall.Length)]; // Random index from 0 to 4
@@ -391,9 +402,30 @@ namespace PongMasters
 
                 opponentSpeed = Math.Abs(ballXspeed);
             }
+        }
 
-            if (ball.Bounds.IntersectsWith(racketOpponent.Bounds) && !opponentRecentlyHit)
+        private void CheckOpponentCollision()
+        {
+            Rectangle ballRect = new Rectangle(ballX, ballY, ballSize, ballSize);
+
+            // Translate opponent paddle bounds relative to gametable
+            Rectangle opponentRect = racketOpponent.Bounds;
+            opponentRect.Offset(-gametable.Left, -gametable.Top);
+
+            if (ballRect.IntersectsWith(opponentRect) && !opponentRecentlyHit)
             {
+                PlaySoundEffect("Assets/Sounds/swing.mp3");
+
+                // Get a new random y-speed
+                int newYspeed = randomBall[random.Next(randomBall.Length)];
+                ballYspeed = Math.Abs(newYspeed); // Always bounce downward
+
+                // Add slight randomness to X-speed
+                ballXspeed = randomBall[random.Next(randomBall.Length)]; // Random index from 0 to 4
+                if (random.Next(0, 2) == 0) ballXspeed = -ballXspeed; // 50% chance to change direction
+
+                opponentSpeed = Math.Abs(ballXspeed);
+
                 hitCount++;
                 Console.WriteLine("My hitCount: " + hitCount);
                 Console.WriteLine("My hitLimit: " + hitLimit);
@@ -402,25 +434,25 @@ namespace PongMasters
                     opponentAvoiding = true;
                 }
 
-                // Set cooldown flag
                 opponentRecentlyHit = true;
-
-                // Start a delayed reset of the flag
                 Task.Delay(200).ContinueWith(_ => opponentRecentlyHit = false);
             }
         }
 
         private void ResetBall()
         {
-            // Cannot divide by width/height only because gametable is not positioned at (0,0)
-            // --> Size can't specify a location
-            // 29 + (759 / 2) - (35 / 2)
-            ball.Top = gametable.Top + (gametable.Height / 2) - (ball.Height / 2);
-            ball.Left = gametable.Left + (gametable.Width / 2) - (ball.Width / 2);
+            // Center ball
+            ballX = gametable.Width / 2 - ballSize / 2;
+            ballY = gametable.Height / 2 - ballSize / 2;
 
-            // Randomize ball speed
-            ballXspeed = randomBall[random.Next(randomBall.Length)]; // Random index from 0 to 4
-            ballYspeed = randomBall[random.Next(randomBall.Length)]; // Random index from 0 to 4
+            // Center opponent paddle
+            racketOpponent.Left = (gametable.Width / 2 + gametable.Left) - racketOpponent.Width / 2;
+
+            // Reset ball speed
+            ballXspeed = ballStartSpeed;
+            ballYspeed = ballStartSpeed;
+
+            opponentSpeed = Math.Abs(ballXspeed);
 
             // Randomize x-direction
             if (random.Next(0, 2) == 0) ballXspeed = -ballXspeed;
@@ -429,19 +461,19 @@ namespace PongMasters
             if (playerScoredLast)
             {
                 // Send ball toward player
-                ballYspeed = -Math.Abs(ballYspeed);
+                ballYspeed = Math.Abs(ballYspeed);
             }
             else
             {
                 // Send ball toward opponent
-                ballYspeed = Math.Abs(ballYspeed);
+                ballYspeed = -Math.Abs(ballYspeed);
             }
         }
         
         private string GetOpponentName(int index)
         {
             string[] names = { "mikko", "boris", "emiko", "ace", "lin" };
-            return names[index]; // CRASHES GAME AFTER BEATING LIN 
+            return names[index];
         }
 
         private string GetDialogueLength(int dialogueNum)
@@ -500,14 +532,14 @@ namespace PongMasters
         {
         }
 
-        //private void Gametable_Paint(object sender, PaintEventArgs e)
-        //{
-        //    using (SolidBrush brush = new SolidBrush(Color.White)) // semi-transparent white
-        //    {
-        //        e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-        //        e.Graphics.FillEllipse(brush, ballX, ballY, ballSize, ballSize);
-        //    }
-        //}
+        private void Gametable_Paint(object sender, PaintEventArgs e)
+        {
+            using (SolidBrush brush = new SolidBrush(Color.White))
+            {
+                e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                e.Graphics.FillEllipse(brush, ballX, ballY, ballSize, ballSize);
+            }
+        }
 
         private int LoadProgress()
         {

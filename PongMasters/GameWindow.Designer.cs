@@ -46,7 +46,6 @@
             this.playerCard = new System.Windows.Forms.PictureBox();
             this.racketPlayer = new System.Windows.Forms.PictureBox();
             this.racketOpponent = new System.Windows.Forms.PictureBox();
-            this.ball = new System.Windows.Forms.PictureBox();
             this.gametable = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.playerText.SuspendLayout();
@@ -61,7 +60,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.playerCard)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.racketPlayer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.racketOpponent)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ball)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gametable)).BeginInit();
             this.SuspendLayout();
             // 
@@ -218,17 +216,6 @@
             this.racketOpponent.TabIndex = 3;
             this.racketOpponent.TabStop = false;
             // 
-            // ball
-            // 
-            this.ball.BackColor = System.Drawing.Color.Black;
-            this.ball.Image = global::PongMasters.Properties.Resources.ball2;
-            this.ball.Location = new System.Drawing.Point(499, 391);
-            this.ball.Name = "ball";
-            this.ball.Size = new System.Drawing.Size(35, 35);
-            this.ball.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.ball.TabIndex = 2;
-            this.ball.TabStop = false;
-            // 
             // gametable
             // 
             this.gametable.Image = global::PongMasters.Properties.Resources.gametable;
@@ -258,7 +245,6 @@
             this.Controls.Add(this.playerCard);
             this.Controls.Add(this.racketPlayer);
             this.Controls.Add(this.racketOpponent);
-            this.Controls.Add(this.ball);
             this.Controls.Add(this.gametable);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Press Start 2P", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -283,7 +269,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.playerCard)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.racketPlayer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.racketOpponent)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ball)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gametable)).EndInit();
             this.ResumeLayout(false);
 
@@ -292,7 +277,6 @@
         #endregion
         private System.Windows.Forms.Timer GameTimer;
         private System.Windows.Forms.PictureBox gametable;
-        private System.Windows.Forms.PictureBox ball;
         private System.Windows.Forms.PictureBox racketOpponent;
         private System.Windows.Forms.PictureBox racketPlayer;
         private System.Windows.Forms.PictureBox playerCard;
