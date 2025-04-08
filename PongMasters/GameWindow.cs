@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using WMPLib;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
+using System.Collections;
 
 namespace PongMasters
 {
@@ -25,23 +26,22 @@ namespace PongMasters
         int playerScore = 0; // int playerScore, opponentScore = 0
         int opponentScore = 0;
         int hitCount = 0;
-        int playerSpeed, opponentSpeed, opponentsWon, opponentsWonCurrently, hitLimit, hitLimitStart, hitLimitEnd;
+        int playerSpeed, opponentSpeed, opponentsWon, opponentsWonCurrently, hitLimit, hitLimitStart, hitLimitEnd, specialRate, specialDelayTimer, queuedX, queuedY;
+        int[] specialTiming;
+        int dialogueStep = 0;
+        int dialogueNum;
         private PictureBox[] opponentPoints;
         private PictureBox[] playerPoints;
         private Timer dialogueTimer;
-        int dialogueStep = 0;
-        int dialogueNum;
         bool opponentAvoiding = false;
         bool opponentRecentlyHit = false;
-        bool playerScoredLast;
+        bool playerScoredLast = false;
         bool goLeft, goRight;
         int[] randomBall = new int[5];
         string[] dialogue;
         Random random = new Random();
         WindowsMediaPlayer sfxPlayer = new WindowsMediaPlayer();
         WindowsMediaPlayer musicPlayer = new WindowsMediaPlayer();
-
-        // Maybe the change the gaining points to losing lifes
 
         public GameWindow()
         {
@@ -63,10 +63,6 @@ namespace PongMasters
             opponentPoint1.Image = opponentPoint2.Image = opponentPoint3.Image = Image.FromFile("Assets/Images/point_empty.png");
             playerPoint1.Image = playerPoint2.Image = playerPoint3.Image = Image.FromFile("Assets/Images/point_empty2.png");
 
-            // Centering ball
-            ballX = gametable.Width / 2 - ballSize / 2;
-            ballY = gametable.Height / 2 - ballSize / 2;
-
             switch (opponentsWon)
             {
                 case 0: // Mikko Virtanen
@@ -74,7 +70,6 @@ namespace PongMasters
                     randomBall = new int[] { 7, 7, 8, 9, 10 }; // One array randomizer vs. two variable randomizer
                     hitLimitStart = 5;
                     hitLimitEnd = 11;
-                    hitLimit = random.Next(hitLimitStart, hitLimitEnd);
                     playerSpeed = 8;
                     dialogue = new string[] { "Moro! Mites menee?", "Turha luulla, että päihität vanhan Suomen mestarin!", "Et kai sä tosissas luule pärjääväs?", "Haha! Eikö osu? Harjoittele vähän!", "Sanoinhan, ettei mua voi voittaa!", "Ei ollut sun päiväsi, juniori!", "Hävisinkö oikeesti?", "Pakko myöntää, sä pelasit hyvin!" };
                     opponentCard.Image = Image.FromFile("Assets/Images/card_mikko.png");
@@ -86,7 +81,6 @@ namespace PongMasters
                     randomBall = new int[] { 8, 9, 10, 11, 12 };
                     hitLimitStart = 10;
                     hitLimitEnd = 16;
-                    hitLimit = random.Next(hitLimitStart, hitLimitEnd);
                     playerSpeed = 9;
                     dialogue = new string[] { "I do not play for fun. I play to destroy.", "You stand no chance against Russian precision.", "Is that all? I expected more resistance.", "Weak. Very weak.", "Victory is inevitable. Your effort was amusing.", "You never had a chance.", "This is unacceptable… how did you do that?", "You got lucky. It won't happen again." };
                     opponentCard.Image = Image.FromFile("Assets/Images/card_boris.png");
@@ -98,7 +92,6 @@ namespace PongMasters
                     randomBall = new int[] { 10, 11, 12, 13, 14 };
                     hitLimitStart = 15;
                     hitLimitEnd = 21;
-                    hitLimit = random.Next(hitLimitStart, hitLimitEnd);
                     playerSpeed = 10;
                     dialogue = new string[] { "I do not underestimate my opponents. Let’s see what you can do.", "A match should be like a haiku - precise and elegant.", "Your movements are too slow. Anticipate the ball.", "A true player adapts. Can you?", "A well-fought match. But victory is mine.", "You lack discipline. Train harder.", "Impressive. You are more skilled than I thought.", "This loss is a lesson. I will return stronger." };
                     opponentCard.Image = Image.FromFile("Assets/Images/card_emiko.png");
@@ -110,7 +103,6 @@ namespace PongMasters
                     randomBall = new int[] { 12, 13, 14, 15, 16 };
                     hitLimitStart = 20;
                     hitLimitEnd = 26;
-                    hitLimit = random.Next(hitLimitStart, hitLimitEnd);
                     playerSpeed = 11;
                     dialogue = new string[] { "Get ready for the main event, starring yours truly!", "They don’t call me ‘Ace’ for nothing!", "I almost fell asleep waiting for that shot!", "Oof! That was ugly. You sure you know how to play?", "A flawless performance, as expected!", "I’ll sign an autograph for you after this, kid!", "Wait… What?! That wasn’t supposed to happen!", "Alright, alright. Rematch, right now!" };
                     opponentDialogue.ForeColor = Color.Black;
@@ -124,7 +116,6 @@ namespace PongMasters
                     randomBall = new int[] { 16, 17, 18, 19, 20 };
                     hitLimitStart = 25;
                     hitLimitEnd = 31;
-                    hitLimit = random.Next(hitLimitStart, hitLimitEnd);
                     playerSpeed = 12;
                     dialogue = new string[] { "I play for perfection. Let’s begin.", "Your reflexes will be tested.", "Predictable. I already knew you’d do that.", "Your technique is flawed. I see every weakness.", "Efficiency leads to victory. That is all.", "You were never in control of this match.", "...Interesting. I did not anticipate that outcome.", "You have earned my respect. Well played." };
                     opponentCard.Image = Image.FromFile("Assets/Images/card_lin.png");
@@ -133,11 +124,8 @@ namespace PongMasters
                     break;
             }
 
-            ballXspeed = ballStartSpeed;
-            if (random.Next(0, 2) == 0) ballXspeed = -ballXspeed; // 50% chance to start going to the left instead
-            ballYspeed = -ballStartSpeed;
-
-            opponentSpeed = Math.Abs(ballXspeed);
+            hitLimit = random.Next(hitLimitStart, hitLimitEnd);
+            ResetBall();
 
             musicPlayer.URL = "Assets/Sounds/begin_match.mp3";
             musicPlayer.settings.volume = 33;
@@ -198,8 +186,6 @@ namespace PongMasters
                 // After 3seconds
                 case 2:
                     opponentDialogue.Text = "";
-                    hitCount = 0;
-                    opponentAvoiding = false;
                     GameTimer.Start();
                     dialogueTimer.Tick -= RoundDialogueTimer_Tick;
                     dialogueTimer.Stop();
@@ -326,8 +312,6 @@ namespace PongMasters
             CheckPlayerCollision();
             CheckOpponentCollision();
 
-            //Console.WriteLine($"OpponentX: {racketOpponent.Left}, BallX: {ballX}, Speed: {opponentSpeed}");
-
             // Opponent AI: Move towards ball
             if (!opponentAvoiding)
             {
@@ -344,6 +328,22 @@ namespace PongMasters
                     racketOpponent.Left += opponentSpeed;
                 else if (ballXspeed > 0)
                     racketOpponent.Left -= opponentSpeed;
+            }
+
+            // Start moving the ball after timer
+            if (specialDelayTimer > 0)
+            {
+                specialDelayTimer--;
+                ballXspeed = 0;
+                ballYspeed = 0;
+
+                if (specialDelayTimer == 0)
+                {
+                    // Resume the ball movement
+                    ballXspeed = queuedX;
+                    ballYspeed = queuedY;
+                    opponentSpeed = Math.Abs(ballXspeed);
+                }
             }
 
             // Ensure player paddle stays within gametable
@@ -377,7 +377,7 @@ namespace PongMasters
                 MatchEnd("player");
             }
 
-            gametable.Invalidate(); // redraw gametable every tick
+            gametable.Invalidate(); // Redraw gametable every tick
         }
 
         private void CheckPlayerCollision()
@@ -393,8 +393,7 @@ namespace PongMasters
                 PlaySoundEffect("Assets/Sounds/swing.mp3");
 
                 // Get a new random y-speed
-                int newYspeed = randomBall[random.Next(randomBall.Length)];
-                ballYspeed = -Math.Abs(newYspeed); // Always bounce upward (prevents the ball from getting stuck inside paddle)
+                ballYspeed = -Math.Abs(randomBall[random.Next(randomBall.Length)]); // Always bounce upward (prevents the ball from getting stuck inside paddle)
 
                 // Add slight randomness to X-speed
                 ballXspeed = randomBall[random.Next(randomBall.Length)]; // Random index from 0 to 4
@@ -414,33 +413,76 @@ namespace PongMasters
 
             if (ballRect.IntersectsWith(opponentRect) && !opponentRecentlyHit)
             {
-                PlaySoundEffect("Assets/Sounds/swing.mp3");
-
-                // Get a new random y-speed
-                int newYspeed = randomBall[random.Next(randomBall.Length)];
-                ballYspeed = Math.Abs(newYspeed); // Always bounce downward
-
-                // Add slight randomness to X-speed
-                ballXspeed = randomBall[random.Next(randomBall.Length)]; // Random index from 0 to 4
-                if (random.Next(0, 2) == 0) ballXspeed = -ballXspeed; // 50% chance to change direction
-
-                opponentSpeed = Math.Abs(ballXspeed);
-
+                opponentRecentlyHit = true;
                 hitCount++;
-                Console.WriteLine("My hitCount: " + hitCount);
-                Console.WriteLine("My hitLimit: " + hitLimit);
+
+                if (specialTiming.Contains(hitCount) && opponentsWon > 0)
+                {
+                    TriggerOpponentSpecial(opponentsWon);
+                    Task.Delay(1000).ContinueWith(_ => opponentRecentlyHit = false);
+                    Console.WriteLine("I did a special move!");
+                }
+                else
+                {
+                    PlaySoundEffect("Assets/Sounds/swing.mp3");
+
+                    // Regular bounce
+                    ballYspeed = Math.Abs(randomBall[random.Next(randomBall.Length)]);
+                    ballXspeed = randomBall[random.Next(randomBall.Length)];
+                    if (random.Next(2) == 0) ballXspeed = -ballXspeed;
+
+                    opponentSpeed = Math.Abs(ballXspeed);
+
+                    Task.Delay(250).ContinueWith(_ => opponentRecentlyHit = false);
+                }
+
                 if (hitCount >= hitLimit)
                 {
                     opponentAvoiding = true;
                 }
 
-                opponentRecentlyHit = true;
-                Task.Delay(200).ContinueWith(_ => opponentRecentlyHit = false);
+                Console.WriteLine(hitCount + " / " + hitLimit);
+                Console.WriteLine("I'm going to do " + specialRate + " special moves!\n");
             }
+        }
+
+        private void TriggerOpponentSpecial(int opponent)
+        {
+            switch (opponent)
+            {
+                case 0: // Mikko Virtanen
+                    return;
+                case 1: // Boris Ivanov
+                    queuedX = Math.Sign(ballXspeed) * random.Next(4, 8);
+                    queuedY = 30;
+                    ballXspeed = 0;
+                    ballYspeed = 0;
+                    // Add another soundcard so the sound won't cut
+                    PlaySoundEffect("Assets/Sounds/special_charge.mp3");
+                    specialDelayTimer = 25;
+                    break;
+                case 2: // Emiko Tanaka
+                    queuedX = Math.Sign(ballXspeed) * random.Next(30, 36);
+                    queuedY = random.Next(8, 11);
+                    ballXspeed = 0;
+                    ballYspeed = 0;
+                    // Add another soundcard so the sound won't cut
+                    PlaySoundEffect("Assets/Sounds/special_charge.mp3");
+                    specialDelayTimer = 25;
+                    break;
+                case 3: // Ace Carter
+                    break;
+                case 4: // Lin Shidong
+                    break;
+            }
+            opponentSpeed = Math.Abs(ballXspeed);
         }
 
         private void ResetBall()
         {
+            hitCount = 0;
+            opponentAvoiding = false;
+
             // Center ball
             ballX = gametable.Width / 2 - ballSize / 2;
             ballY = gametable.Height / 2 - ballSize / 2;
@@ -451,8 +493,22 @@ namespace PongMasters
             // Reset ball speed
             ballXspeed = ballStartSpeed;
             ballYspeed = ballStartSpeed;
-
             opponentSpeed = Math.Abs(ballXspeed);
+
+            // Randomize the amount of specials
+            specialRate = random.Next(1, 4);
+            specialTiming = new int[specialRate];
+
+            // Randomizes the timing of specials
+            for (int i = 0; i < specialRate; i++)
+            {
+                int min = Math.Max(1, (i * hitLimit) / specialRate);
+                int max = ((i + 1) * hitLimit) / specialRate;
+
+                if (min >= max) max = min + 1;
+
+                specialTiming[i] = random.Next(min, max);
+            }
 
             // Randomize x-direction
             if (random.Next(0, 2) == 0) ballXspeed = -ballXspeed;
@@ -534,10 +590,29 @@ namespace PongMasters
 
         private void Gametable_Paint(object sender, PaintEventArgs e)
         {
-            using (SolidBrush brush = new SolidBrush(Color.White))
+            Graphics g = e.Graphics;
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+            // Set up the glow ellipse slightly larger than the ball
+            Rectangle glowRect = new Rectangle(ballX - 35, ballY - 35, ballSize + 70, ballSize + 70);
+
+            using (System.Drawing.Drawing2D.GraphicsPath path = new System.Drawing.Drawing2D.GraphicsPath())
             {
-                e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                e.Graphics.FillEllipse(brush, ballX, ballY, ballSize, ballSize);
+                path.AddEllipse(glowRect);
+
+                using (System.Drawing.Drawing2D.PathGradientBrush brush = new System.Drawing.Drawing2D.PathGradientBrush(path))
+                {
+                    brush.CenterColor = Color.FromArgb(100, Color.White); // Strong glow at center
+                    brush.SurroundColors = new Color[] { Color.FromArgb(0, Color.White) }; // Transparent edges
+
+                    g.FillEllipse(brush, glowRect);
+                }
+            }
+
+            // Draw the main ball
+            using (SolidBrush ballBrush = new SolidBrush(Color.White))
+            {
+                g.FillEllipse(ballBrush, ballX, ballY, ballSize, ballSize); // Ball hitbox
             }
         }
 

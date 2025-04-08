@@ -120,3 +120,4 @@ C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\Assets\Sounds\musi
 C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\Assets\Sounds\music_ace.mp3
 C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\Assets\Sounds\music_emiko.mp3
 C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\Assets\Sounds\music_lin.mp3
+C:\Users\adgun\source\repos\PongMasters\PongMasters\bin\Debug\Assets\Sounds\special_charge.mp3
