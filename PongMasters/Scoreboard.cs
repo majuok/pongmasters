@@ -16,7 +16,6 @@ namespace PongMasters
     {
         int opponentsWon;
         int opponentsWonPrev;
-        WindowsMediaPlayer sfxPlayer = new WindowsMediaPlayer();
         WindowsMediaPlayer musicPlayer = new WindowsMediaPlayer();
         public Scoreboard()
         {
@@ -131,18 +130,11 @@ namespace PongMasters
             musicPlayer.controls.play();
         }
 
-        void PlaySoundEffect(string soundFile)
-        {
-            sfxPlayer.URL = soundFile;
-            sfxPlayer.settings.volume = 33;
-            sfxPlayer.controls.play();
-        }
-
         private void buttonPlay_MouseEnter(object sender, EventArgs e)
         {
             buttonPlay.Image = Image.FromFile("Assets/Images/button_play_hover.png");
             buttonPlay.Cursor = Cursors.Hand;
-            PlaySoundEffect("Assets/Sounds/menu_hover_play.mp3");
+            SoundManager.PlaySoundEffect("Assets/Sounds/menu_hover_play.mp3");
         }
 
         private void buttonPlay_MouseLeave(object sender, EventArgs e)
@@ -155,7 +147,7 @@ namespace PongMasters
         {
             buttonExit.Image = Image.FromFile("Assets/Images/button_exit_hover.png");
             buttonExit.Cursor = Cursors.Hand;
-            PlaySoundEffect("Assets/Sounds/menu_hover_exit.mp3");
+            SoundManager.PlaySoundEffect("Assets/Sounds/menu_hover_exit.mp3");
         }
 
         private void buttonExit_MouseLeave(object sender, EventArgs e)
@@ -166,7 +158,7 @@ namespace PongMasters
 
         private void buttonPlay_Click(object sender, EventArgs e)
         {
-            PlaySoundEffect("Assets/Sounds/menu_press_play.mp3");
+            SoundManager.PlaySoundEffect("Assets/Sounds/menu_press_play.mp3");
             musicPlayer.controls.stop();
             GameWindow gameWindow = new GameWindow();
             gameWindow.StartPosition = FormStartPosition.Manual;
@@ -190,17 +182,11 @@ namespace PongMasters
 
         private void Scoreboard_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DisposeMediaPlayer(musicPlayer);
-            DisposeMediaPlayer(sfxPlayer);
-        }
-
-        private void DisposeMediaPlayer(WindowsMediaPlayer player)
-        {
-            if (player != null)
+            if (musicPlayer != null)
             {
-                player.controls.stop();
-                player.close();
-                player = null; // Prevent memory leaks
+                musicPlayer.controls.stop();
+                musicPlayer.close();
+                musicPlayer = null;
             }
         }
     }

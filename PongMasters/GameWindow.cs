@@ -17,30 +17,33 @@ namespace PongMasters
 {
     public partial class GameWindow : Form
     {
-        int ballX = 499;
-        int ballY = 391;
+        int ballX, linBallX;
+        int ballY, linBallY;
         int ballSize = 35;
         int ballStartSpeed;
-        int ballXspeed;
-        int ballYspeed;
+        int ballXspeed, linBallXspeed;
+        int ballYspeed, linBallYspeed;
         int playerScore = 0; // int playerScore, opponentScore = 0
         int opponentScore = 0;
         int hitCount = 0;
-        int playerSpeed, opponentSpeed, opponentsWon, opponentsWonCurrently, hitLimit, hitLimitStart, hitLimitEnd, specialRate, specialDelayTimer, queuedX, queuedY;
+        int playerSpeed, opponentSpeed, opponentsWon, opponentsWonCurrently;
+        int hitLimit, hitLimitStart, hitLimitEnd;
+        int specialRate, specialDelayTimer, queuedX, queuedY;
         int[] specialTiming;
         int dialogueStep = 0;
         int dialogueNum;
+        string[] dialogue;
+        private Timer dialogueTimer;
         private PictureBox[] opponentPoints;
         private PictureBox[] playerPoints;
-        private Timer dialogueTimer;
         bool opponentAvoiding = false;
         bool opponentRecentlyHit = false;
         bool playerScoredLast = false;
+        bool aceSpecialActive = false;
+        bool linBallActive = false;
         bool goLeft, goRight;
         int[] randomBall = new int[5];
-        string[] dialogue;
         Random random = new Random();
-        WindowsMediaPlayer sfxPlayer = new WindowsMediaPlayer();
         WindowsMediaPlayer musicPlayer = new WindowsMediaPlayer();
 
         public GameWindow()
@@ -127,9 +130,7 @@ namespace PongMasters
             hitLimit = random.Next(hitLimitStart, hitLimitEnd);
             ResetBall();
 
-            musicPlayer.URL = "Assets/Sounds/begin_match.mp3";
-            musicPlayer.settings.volume = 33;
-            musicPlayer.controls.play();
+            SoundManager.PlaySpecialSoundEffect("Assets/Sounds/begin_match.mp3");
 
             dialogueTimer = new Timer
             {
@@ -148,19 +149,20 @@ namespace PongMasters
                 // After 2 seconds
                 case 0:
                     opponentDialogue.Text = dialogue[0];
-                    PlaySoundEffect($"Assets/Sounds/taunt_{GetOpponentName(opponentsWonCurrently)}{GetDialogueLength(0)}.mp3");
+                    SoundManager.PlaySoundEffect($"Assets/Sounds/taunt_{GetOpponentName(opponentsWonCurrently)}{GetDialogueLength(0)}.mp3");
                     dialogueTimer.Interval = 4000;
                     break;
                 // After 6 seconds
                 case 1:
                     opponentDialogue.Text = dialogue[1];
-                    PlaySoundEffect($"Assets/Sounds/taunt_{GetOpponentName(opponentsWonCurrently)}{GetDialogueLength(1)}.mp3");
+                    SoundManager.PlaySoundEffect($"Assets/Sounds/taunt_{GetOpponentName(opponentsWonCurrently)}{GetDialogueLength(1)}.mp3");
                     break;
                 // After 10 seconds
                 case 2:
                     opponentDialogue.Text = "";
                     musicPlayer.URL = $"Assets/Sounds/music_{GetOpponentName(opponentsWonCurrently)}.mp3";
                     musicPlayer.settings.setMode("loop", true);
+                    musicPlayer.settings.volume = 33;
                     musicPlayer.controls.play();
                     dialogueTimer.Tick -= IntroDialogueTimer_Tick;
                     dialogueTimer.Stop();
@@ -177,11 +179,11 @@ namespace PongMasters
                 // After 1 second
                 case 0:
                     opponentDialogue.Text = dialogue[dialogueNum];
-                    PlaySoundEffect($"Assets/Sounds/taunt_{GetOpponentName(opponentsWonCurrently)}{GetDialogueLength(dialogueNum)}.mp3");
+                    SoundManager.PlaySoundEffect($"Assets/Sounds/taunt_{GetOpponentName(opponentsWonCurrently)}{GetDialogueLength(dialogueNum)}.mp3");
                     break;
                 // After 2 seconds
                 case 1:
-                    PlaySoundEffect("Assets/Sounds/begin_round.mp3");
+                    SoundManager.PlaySoundEffect("Assets/Sounds/begin_round.mp3");
                     break;
                 // After 3seconds
                 case 2:
@@ -200,33 +202,26 @@ namespace PongMasters
             {
                 // After 1 second
                 case 0:
-                    musicPlayer.URL = "Assets/Sounds/begin_match.mp3";
-                    musicPlayer.controls.play();
+                    SoundManager.PlaySpecialSoundEffect("Assets/Sounds/begin_match.mp3");
                     opponentDialogue.Text = dialogue[dialogueNum];
-                    PlaySoundEffect($"Assets/Sounds/taunt_{GetOpponentName(opponentsWonCurrently)}{GetDialogueLength(dialogueNum)}.mp3");
+                    SoundManager.PlaySoundEffect($"Assets/Sounds/taunt_{GetOpponentName(opponentsWonCurrently)}{GetDialogueLength(dialogueNum)}.mp3");
                     dialogueTimer.Interval = 3000;
                     break;
                 // After 4 seconds
                 case 1:
                     dialogueNum++;
                     opponentDialogue.Text = dialogue[dialogueNum];
-                    PlaySoundEffect($"Assets/Sounds/taunt_{GetOpponentName(opponentsWonCurrently)}{GetDialogueLength(dialogueNum)}.mp3");
+                    SoundManager.PlaySoundEffect($"Assets/Sounds/taunt_{GetOpponentName(opponentsWonCurrently)}{GetDialogueLength(dialogueNum)}.mp3");
                     break;
                 // After 7 seconds
                 case 2:
                     dialogueTimer.Tick -= OutroDialogueTimer_Tick;
                     dialogueTimer.Stop();
+                    SoundManager.StopSpecialSoundEffect();
                     this.Close();
                     return;
             }
             dialogueStep++;
-        }
-
-        void PlaySoundEffect(string soundFile)
-        {
-            sfxPlayer.URL = soundFile;
-            sfxPlayer.settings.volume = 33;
-            sfxPlayer.controls.play();
         }
 
         private void KeyIsDown(object sender, KeyEventArgs e)
@@ -247,12 +242,24 @@ namespace PongMasters
             ballX += ballXspeed;
             ballY += ballYspeed;
 
+            if (linBallActive)
+            {
+                linBallX += linBallXspeed;
+                linBallY += linBallYspeed;
+            }
+
             // Ball collision with left wall (separated wall logic to prevent bugs)
             if (ballX <= 0)
             {
                 ballX = 0; // snap to wall edge
                 ballXspeed = Math.Abs(ballXspeed); // always bounce to the right
-                PlaySoundEffect("Assets/Sounds/ball2.mp3");
+                SoundManager.PlaySoundEffect("Assets/Sounds/ball2.mp3");
+            }
+            if (linBallX <= 0 && linBallActive)
+            {
+                linBallX = 0;
+                linBallXspeed = Math.Abs(ballXspeed);
+                SoundManager.PlaySoundEffect("Assets/Sounds/ball2.mp3");
             }
 
             // Ball collision with right wall (separated wall logic to prevent bugs)
@@ -260,7 +267,13 @@ namespace PongMasters
             {
                 ballX = gametable.Width - ballSize; // snap to wall edge
                 ballXspeed = -Math.Abs(ballXspeed); // always bounce to the left
-                PlaySoundEffect("Assets/Sounds/ball2.mp3");
+                SoundManager.PlaySoundEffect("Assets/Sounds/ball2.mp3");
+            }
+            if (linBallX + ballSize >= gametable.Width && linBallActive)
+            {
+                linBallX = gametable.Width - ballSize;
+                linBallXspeed = -Math.Abs(ballXspeed);
+                SoundManager.PlaySoundEffect("Assets/Sounds/ball2.mp3");
             }
 
             // Player scores
@@ -270,7 +283,7 @@ namespace PongMasters
                 playerScoredLast = true;
                 hitLimit = random.Next(hitLimitStart, hitLimitEnd);
                 playerPoints[playerScore - 1].Image = Image.FromFile("Assets/Images/point_player.png");
-                PlaySoundEffect("Assets/Sounds/hit_opponent.mp3");
+                SoundManager.PlaySoundEffect("Assets/Sounds/hit_opponent.mp3");
 
                 ResetBall();
 
@@ -287,12 +300,15 @@ namespace PongMasters
             }
 
             // Opponent scores
-            if (ballY + ballSize >= gametable.Height)
+            if (ballY + ballSize >= gametable.Height || linBallY + ballSize >= gametable.Height)
             {
                 opponentScore++;
                 playerScoredLast = false;
+                linBallActive = false;
+                linBallX = 0;
+                linBallY = 0;
                 opponentPoints[opponentScore - 1].Image = Image.FromFile($"Assets/Images/point_{GetOpponentName(opponentsWonCurrently)}.png");
-                PlaySoundEffect("Assets/Sounds/hit_player1.mp3");
+                SoundManager.PlaySoundEffect("Assets/Sounds/hit_player1.mp3");
 
                 ResetBall();
 
@@ -330,19 +346,46 @@ namespace PongMasters
                     racketOpponent.Left -= opponentSpeed;
             }
 
-            // Start moving the ball after timer
+            // Timer for specials
             if (specialDelayTimer > 0)
             {
                 specialDelayTimer--;
-                ballXspeed = 0;
-                ballYspeed = 0;
+                if (opponentsWon < 3 && opponentsWon > 0)
+                {
+                    // To make sure the ball doesn't move during charge
+                    ballXspeed = 0;
+                    ballYspeed = 0;
+                }
 
-                if (specialDelayTimer == 0)
+                // Special for Boris and Emiko
+                if (specialDelayTimer == 0 && opponentsWon < 3)
                 {
                     // Resume the ball movement
                     ballXspeed = queuedX;
                     ballYspeed = queuedY;
                     opponentSpeed = Math.Abs(ballXspeed);
+                }
+
+                // Special for Ace
+                if (specialDelayTimer == 0 && opponentsWon == 3)
+                {
+                    // Move ball back to opponent's paddle
+                    SoundManager.PlaySpecialSoundEffect("Assets/Sounds/special_charge.mp3");
+                    ballXspeed = -ballXspeed;
+                    ballYspeed = -30;
+                    aceSpecialActive = true;
+                }
+
+                // Special for Lin
+                if (specialDelayTimer == 0 && opponentsWon == 4)
+                {
+                    // Another ball spawns from opponent's paddle
+                    SoundManager.PlaySpecialSoundEffect("Assets/Sounds/special_charge.mp3");
+                    linBallX = racketOpponent.Left + racketOpponent.Width / 2;
+                    linBallY = racketOpponent.Bottom;
+                    linBallXspeed = -ballXspeed;
+                    linBallYspeed = Math.Abs(ballYspeed / 2); // varmista, että nopeudet ovat aina puolittuneet
+                    linBallActive = true;
                 }
             }
 
@@ -383,6 +426,7 @@ namespace PongMasters
         private void CheckPlayerCollision()
         {
             Rectangle ballRect = new Rectangle(ballX, ballY, ballSize, ballSize);
+            Rectangle linBallRect = new Rectangle(linBallX, linBallY, ballSize, ballSize);
 
             // Translate player paddle bounds relative to gametable
             Rectangle playerRect = racketPlayer.Bounds;
@@ -390,7 +434,7 @@ namespace PongMasters
 
             if (ballRect.IntersectsWith(playerRect))
             {
-                PlaySoundEffect("Assets/Sounds/swing.mp3");
+                SoundManager.PlaySoundEffect("Assets/Sounds/swing.mp3");
 
                 // Get a new random y-speed
                 ballYspeed = -Math.Abs(randomBall[random.Next(randomBall.Length)]); // Always bounce upward (prevents the ball from getting stuck inside paddle)
@@ -400,6 +444,12 @@ namespace PongMasters
                 if (random.Next(0, 2) == 0) ballXspeed = -ballXspeed; // 50% chance to change direction
 
                 opponentSpeed = Math.Abs(ballXspeed);
+            }
+
+            if (linBallRect.IntersectsWith(playerRect))
+            {
+                SoundManager.PlaySpecialSoundEffect("Assets/Sounds/hit_player2.mp3"); // laita joku uniikki
+                linBallActive = false;
             }
         }
 
@@ -416,18 +466,43 @@ namespace PongMasters
                 opponentRecentlyHit = true;
                 hitCount++;
 
-                if (specialTiming.Contains(hitCount) && opponentsWon > 0)
+                // Boris and Emiko specials
+                if (specialTiming.Contains(hitCount) && opponentsWon > 0 && opponentsWon < 3)
                 {
                     TriggerOpponentSpecial(opponentsWon);
                     Task.Delay(1000).ContinueWith(_ => opponentRecentlyHit = false);
                     Console.WriteLine("I did a special move!");
                 }
+                // Ace and Lin specials
+                if (specialTiming.Contains(hitCount) && opponentsWon >= 3)
+                {
+                    SoundManager.PlaySoundEffect("Assets/Sounds/swing.mp3");
+
+                    ballYspeed = Math.Abs(randomBall[random.Next(randomBall.Length)]);
+                    ballXspeed = randomBall[random.Next(randomBall.Length)];
+                    if (random.Next(2) == 0) ballXspeed = -ballXspeed;
+                    opponentSpeed = Math.Abs(ballXspeed);
+
+                    TriggerOpponentSpecial(opponentsWon);
+                    Console.WriteLine("I did a special move!");
+
+                    Task.Delay(250).ContinueWith(_ => opponentRecentlyHit = false);
+                }
+                // Mikko
                 else
                 {
-                    PlaySoundEffect("Assets/Sounds/swing.mp3");
+                    SoundManager.PlaySoundEffect("Assets/Sounds/swing.mp3");
 
-                    // Regular bounce
-                    ballYspeed = Math.Abs(randomBall[random.Next(randomBall.Length)]);
+                    if (aceSpecialActive)
+                    {
+                        ballYspeed = random.Next(20, 26);
+                        aceSpecialActive = false;
+                    }
+                    else
+                    {
+                        ballYspeed = Math.Abs(randomBall[random.Next(randomBall.Length)]);
+                    }
+    
                     ballXspeed = randomBall[random.Next(randomBall.Length)];
                     if (random.Next(2) == 0) ballXspeed = -ballXspeed;
 
@@ -457,8 +532,7 @@ namespace PongMasters
                     queuedY = 30;
                     ballXspeed = 0;
                     ballYspeed = 0;
-                    // Add another soundcard so the sound won't cut
-                    PlaySoundEffect("Assets/Sounds/special_charge.mp3");
+                    SoundManager.PlaySpecialSoundEffect("Assets/Sounds/special_charge.mp3");
                     specialDelayTimer = 25;
                     break;
                 case 2: // Emiko Tanaka
@@ -466,13 +540,14 @@ namespace PongMasters
                     queuedY = random.Next(8, 11);
                     ballXspeed = 0;
                     ballYspeed = 0;
-                    // Add another soundcard so the sound won't cut
-                    PlaySoundEffect("Assets/Sounds/special_charge.mp3");
+                    SoundManager.PlaySpecialSoundEffect("Assets/Sounds/special_charge.mp3");
                     specialDelayTimer = 25;
                     break;
                 case 3: // Ace Carter
+                    specialDelayTimer = 30;
                     break;
                 case 4: // Lin Shidong
+                    specialDelayTimer = 15;
                     break;
             }
             opponentSpeed = Math.Abs(ballXspeed);
@@ -545,7 +620,7 @@ namespace PongMasters
         private void MatchEnd(string winner)
         {
             GameTimer.Stop();
-            PlaySoundEffect("Assets/Sounds/knockdown.mp3");
+            SoundManager.PlaySoundEffect("Assets/Sounds/knockdown.mp3");
             musicPlayer.controls.stop();
             dialogueStep = 0;
             dialogueTimer.Tick += OutroDialogueTimer_Tick;
@@ -614,6 +689,30 @@ namespace PongMasters
             {
                 g.FillEllipse(ballBrush, ballX, ballY, ballSize, ballSize); // Ball hitbox
             }
+
+            if (linBallActive)
+            {
+                // Set up the glow ellipse slightly larger than the ball
+                Rectangle linGlowRect = new Rectangle(linBallX - 35, linBallY - 35, ballSize + 70, ballSize + 70);
+
+                using (System.Drawing.Drawing2D.GraphicsPath path = new System.Drawing.Drawing2D.GraphicsPath())
+                {
+                    path.AddEllipse(linGlowRect);
+
+                    using (System.Drawing.Drawing2D.PathGradientBrush brush = new System.Drawing.Drawing2D.PathGradientBrush(path))
+                    {
+                        brush.CenterColor = Color.FromArgb(100, Color.Red); // Strong glow at center
+                        brush.SurroundColors = new Color[] { Color.FromArgb(0, Color.Red) }; // Transparent edges
+
+                        g.FillEllipse(brush, linGlowRect);
+                    }
+                }
+
+                using (SolidBrush linBrush = new SolidBrush(Color.Red))
+                {
+                    g.FillEllipse(linBrush, linBallX, linBallY, ballSize, ballSize); // Ball hitbox
+                }
+            }
         }
 
         private int LoadProgress()
@@ -629,17 +728,11 @@ namespace PongMasters
         {
             dialogueTimer.Stop();
             GameTimer.Stop();
-            DisposeMediaPlayer(musicPlayer);
-            DisposeMediaPlayer(sfxPlayer);
-        }
-
-        private void DisposeMediaPlayer(WindowsMediaPlayer player)
-        {
-            if (player != null)
+            if (musicPlayer != null)
             {
-                player.controls.stop();
-                player.close();
-                player = null; // Prevent memory leaks
+                musicPlayer.controls.stop();
+                musicPlayer.close();
+                musicPlayer = null; // Prevent memory leaks
             }
         }
     }
