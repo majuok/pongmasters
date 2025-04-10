@@ -42,7 +42,7 @@ namespace PongMasters
             {
                 return int.Parse(File.ReadAllText("progress.txt"));
             }
-            return 0; // start from 0 if no save file exists
+            return 0; // Start from 0 if no save file exists
         }
 
         private void SaveProgress(int opponentsWon)
@@ -106,14 +106,14 @@ namespace PongMasters
 
         private void UpdateInfoTextAndMusic()
         {
-            if (opponentsWon > opponentsWonPrev && opponentsWon < 5)
+            if ((opponentsWon > opponentsWonPrev && opponentsWon < 5) || (opponentsWon == 1 && opponentsWonPrev == 5))
             {
                 infoText.Text = $"Voitit ottelun!\nEnään {5 - opponentsWon} vastustajaa jäljellä.";
                 musicPlayer.URL = "Assets/Sounds/music_game_win.mp3";
             }
             else if (opponentsWon < opponentsWonPrev)
             {
-                infoText.Text = "Hävisit ottelun!\nJoudut aloittamaan pelin alusta.";
+                infoText.Text = "Hävisit ottelun!\nTipuit yhden alemmas.";
                 musicPlayer.URL = "Assets/Sounds/music_game_lose.mp3";
             }
             else if (opponentsWon == 5)

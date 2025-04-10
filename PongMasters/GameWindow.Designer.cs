@@ -31,11 +31,11 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GameWindow));
             this.GameTimer = new System.Windows.Forms.Timer(this.components);
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.playerText = new System.Windows.Forms.Panel();
-            this.playerDialogue = new System.Windows.Forms.Label();
             this.opponentText = new System.Windows.Forms.Panel();
             this.opponentDialogue = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.playerText = new System.Windows.Forms.Panel();
+            this.playerTimer = new System.Windows.Forms.Label();
             this.opponentPoint3 = new System.Windows.Forms.PictureBox();
             this.opponentPoint2 = new System.Windows.Forms.PictureBox();
             this.opponentPoint1 = new System.Windows.Forms.PictureBox();
@@ -47,9 +47,9 @@
             this.racketPlayer = new System.Windows.Forms.PictureBox();
             this.racketOpponent = new System.Windows.Forms.PictureBox();
             this.gametable = new System.Windows.Forms.PictureBox();
+            this.opponentText.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.playerText.SuspendLayout();
-            this.opponentText.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.opponentPoint3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.opponentPoint2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.opponentPoint1)).BeginInit();
@@ -67,39 +67,6 @@
             // 
             this.GameTimer.Interval = 16;
             this.GameTimer.Tick += new System.EventHandler(this.GameTimerEvent);
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox2.Image = global::PongMasters.Properties.Resources.line;
-            this.pictureBox2.Location = new System.Drawing.Point(27, 397);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(170, 23);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 17;
-            this.pictureBox2.TabStop = false;
-            // 
-            // playerText
-            // 
-            this.playerText.BackgroundImage = global::PongMasters.Properties.Resources.textbox_player;
-            this.playerText.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.playerText.Controls.Add(this.playerDialogue);
-            this.playerText.Location = new System.Drawing.Point(27, 502);
-            this.playerText.Name = "playerText";
-            this.playerText.Size = new System.Drawing.Size(170, 80);
-            this.playerText.TabIndex = 16;
-            // 
-            // playerDialogue
-            // 
-            this.playerDialogue.BackColor = System.Drawing.Color.Transparent;
-            this.playerDialogue.Font = new System.Drawing.Font("Press Start 2P", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.playerDialogue.Location = new System.Drawing.Point(3, 0);
-            this.playerDialogue.Name = "playerDialogue";
-            this.playerDialogue.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
-            this.playerDialogue.Size = new System.Drawing.Size(164, 80);
-            this.playerDialogue.TabIndex = 1;
-            this.playerDialogue.Text = "00:00";
-            this.playerDialogue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // opponentText
             // 
@@ -122,8 +89,42 @@
             this.opponentDialogue.TabIndex = 0;
             this.opponentDialogue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox2.Image = global::PongMasters.Properties.Resources.line;
+            this.pictureBox2.Location = new System.Drawing.Point(27, 397);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(170, 23);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 17;
+            this.pictureBox2.TabStop = false;
+            // 
+            // playerText
+            // 
+            this.playerText.BackgroundImage = global::PongMasters.Properties.Resources.textbox_player;
+            this.playerText.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.playerText.Controls.Add(this.playerTimer);
+            this.playerText.Location = new System.Drawing.Point(27, 502);
+            this.playerText.Name = "playerText";
+            this.playerText.Size = new System.Drawing.Size(170, 80);
+            this.playerText.TabIndex = 16;
+            // 
+            // playerTimer
+            // 
+            this.playerTimer.BackColor = System.Drawing.Color.Transparent;
+            this.playerTimer.Font = new System.Drawing.Font("Press Start 2P", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.playerTimer.Location = new System.Drawing.Point(3, 0);
+            this.playerTimer.Name = "playerTimer";
+            this.playerTimer.Padding = new System.Windows.Forms.Padding(0, 12, 0, 0);
+            this.playerTimer.Size = new System.Drawing.Size(164, 80);
+            this.playerTimer.TabIndex = 1;
+            this.playerTimer.Text = "00:00";
+            this.playerTimer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // opponentPoint3
             // 
+            this.opponentPoint3.BackColor = System.Drawing.Color.Transparent;
             this.opponentPoint3.Location = new System.Drawing.Point(145, 339);
             this.opponentPoint3.Name = "opponentPoint3";
             this.opponentPoint3.Size = new System.Drawing.Size(52, 52);
@@ -133,6 +134,7 @@
             // 
             // opponentPoint2
             // 
+            this.opponentPoint2.BackColor = System.Drawing.Color.Transparent;
             this.opponentPoint2.Location = new System.Drawing.Point(85, 339);
             this.opponentPoint2.Name = "opponentPoint2";
             this.opponentPoint2.Size = new System.Drawing.Size(52, 52);
@@ -142,6 +144,7 @@
             // 
             // opponentPoint1
             // 
+            this.opponentPoint1.BackColor = System.Drawing.Color.Transparent;
             this.opponentPoint1.Location = new System.Drawing.Point(27, 339);
             this.opponentPoint1.Name = "opponentPoint1";
             this.opponentPoint1.Size = new System.Drawing.Size(52, 52);
@@ -151,6 +154,7 @@
             // 
             // playerPoint3
             // 
+            this.playerPoint3.BackColor = System.Drawing.Color.Transparent;
             this.playerPoint3.Location = new System.Drawing.Point(145, 426);
             this.playerPoint3.Name = "playerPoint3";
             this.playerPoint3.Size = new System.Drawing.Size(52, 52);
@@ -160,6 +164,7 @@
             // 
             // playerPoint2
             // 
+            this.playerPoint2.BackColor = System.Drawing.Color.Transparent;
             this.playerPoint2.Location = new System.Drawing.Point(85, 426);
             this.playerPoint2.Name = "playerPoint2";
             this.playerPoint2.Size = new System.Drawing.Size(52, 52);
@@ -169,6 +174,7 @@
             // 
             // playerPoint1
             // 
+            this.playerPoint1.BackColor = System.Drawing.Color.Transparent;
             this.playerPoint1.Location = new System.Drawing.Point(27, 426);
             this.playerPoint1.Name = "playerPoint1";
             this.playerPoint1.Size = new System.Drawing.Size(52, 52);
@@ -231,6 +237,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(200)))), ((int)(((byte)(163)))));
+            this.BackgroundImage = global::PongMasters.Properties.Resources.background1;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(834, 811);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.playerText);
@@ -256,9 +264,9 @@
             this.Text = "Pong Masters";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyIsDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyIsUp);
+            this.opponentText.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.playerText.ResumeLayout(false);
-            this.opponentText.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.opponentPoint3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.opponentPoint2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.opponentPoint1)).EndInit();
@@ -291,6 +299,6 @@
         private System.Windows.Forms.Label opponentDialogue;
         private System.Windows.Forms.Panel playerText;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.Label playerDialogue;
+        private System.Windows.Forms.Label playerTimer;
     }
 }

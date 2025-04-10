@@ -58,6 +58,8 @@
             // 
             // tableLayoutPanel1
             // 
+            this.tableLayoutPanel1.BackgroundImage = global::PongMasters.Properties.Resources.background1;
+            this.tableLayoutPanel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 3);
@@ -77,6 +79,7 @@
             // 
             // tableLayoutPanel2
             // 
+            this.tableLayoutPanel2.BackColor = System.Drawing.Color.Transparent;
             this.tableLayoutPanel2.ColumnCount = 2;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -122,6 +125,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.Image = global::PongMasters.Properties.Resources.logo1;
             this.pictureBox1.Location = new System.Drawing.Point(181, 48);
             this.pictureBox1.Name = "pictureBox1";
@@ -299,6 +303,7 @@
             // infoText
             // 
             this.infoText.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.infoText.BackColor = System.Drawing.Color.Transparent;
             this.infoText.Font = new System.Drawing.Font("Press Start 2P", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.infoText.Location = new System.Drawing.Point(31, 132);
             this.infoText.Margin = new System.Windows.Forms.Padding(3, 0, 3, 5);

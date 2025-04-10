@@ -24,6 +24,11 @@ public static class SoundManager
         specialSfxPlayer.controls.play();
     }
 
+    public static void StopSoundEffect()
+    {
+        sfxPlayer.controls.stop();
+    }
+
     public static void StopSpecialSoundEffect()
     {
         specialSfxPlayer.controls.stop();

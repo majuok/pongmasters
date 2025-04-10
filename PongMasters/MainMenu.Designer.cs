@@ -30,9 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainMenu));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.buttonPlay = new System.Windows.Forms.PictureBox();
             this.buttonExit = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1.SuspendLayout();
@@ -44,6 +44,7 @@
             // 
             // tableLayoutPanel1
             // 
+            this.tableLayoutPanel1.BackgroundImage = global::PongMasters.Properties.Resources.background1;
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
             this.tableLayoutPanel1.Controls.Add(this.pictureBox1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.pictureBox2, 0, 1);
@@ -53,9 +54,16 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
             // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Name = "label1";
+            // 
             // pictureBox1
             // 
             resources.ApplyResources(this.pictureBox1, "pictureBox1");
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.Image = global::PongMasters.Properties.Resources.icon;
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.TabStop = false;
@@ -63,18 +71,15 @@
             // pictureBox2
             // 
             resources.ApplyResources(this.pictureBox2, "pictureBox2");
+            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox2.Image = global::PongMasters.Properties.Resources.logo1;
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.TabStop = false;
             // 
-            // label1
-            // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
-            // 
             // buttonPlay
             // 
             resources.ApplyResources(this.buttonPlay, "buttonPlay");
+            this.buttonPlay.BackColor = System.Drawing.Color.Transparent;
             this.buttonPlay.Name = "buttonPlay";
             this.buttonPlay.TabStop = false;
             this.buttonPlay.Click += new System.EventHandler(this.buttonPlay_Click);
@@ -84,6 +89,7 @@
             // buttonExit
             // 
             resources.ApplyResources(this.buttonExit, "buttonExit");
+            this.buttonExit.BackColor = System.Drawing.Color.Transparent;
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.TabStop = false;
             this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
