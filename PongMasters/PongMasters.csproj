@@ -122,16 +122,12 @@
     <None Include="Resources\button_exit.png" />
     <None Include="Resources\button_play.png" />
     <None Include="Resources\card_player2.png" />
-    <None Include="Resources\ball.png" />
     <None Include="Resources\racket_player1.png" />
     <None Include="Resources\textbox_player.png" />
-    <None Include="Resources\card_player.png" />
     <None Include="Resources\gametable.png" />
     <None Include="Resources\scoreboard.png" />
     <None Include="Resources\icon.png" />
     <None Include="Resources\logo1.png" />
-    <None Include="Resources\logo.png" />
-    <None Include="Resources\racket_player.png" />
     <None Include="Resources\table.png" />
   </ItemGroup>
   <ItemGroup>
@@ -365,12 +361,8 @@
     </Content>
     <Content Include="icon.ico" />
     <None Include="Resources\background1.png" />
-    <None Include="Resources\background.png" />
-    <None Include="Resources\line2.png" />
-    <None Include="Resources\ball2.png" />
     <None Include="Resources\line.png" />
     <None Include="Resources\point_player.png" />
-    <None Include="Resources\ball1.png" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="WMPLib">
