@@ -86,7 +86,7 @@ namespace PongMasters
                     hitLimitStart = 6;
                     hitLimitEnd = 12;
                     playerSpeed = 9;
-                    dialogue = new string[] { "I do not play for fun. I play to destroy.", "You stand no chance against Russian precision.", "Is that all? I expected more resistance.", "Weak. Very weak.", "Victory is inevitable. Your effort was amusing.", "You never had a chance.", "This is unacceptable… how did you do that?", "You got lucky. It won't happen again." };
+                    dialogue = new string[] { "I do not play for fun. I play to destroy.", "You stand no chance against Russian precision.", "Is that all?", "Weak. Very weak.", "Victory is inevitable. Your effort was amusing.", "You never had a chance.", "This is unacceptable… how did you do that?", "You got lucky. It won't happen again." };
                     opponentCard.Image = Image.FromFile("Assets/Images/card_boris.png");
                     opponentText.BackgroundImage = Image.FromFile("Assets/Images/textbox_boris.png");
                     racketOpponent.Image = Image.FromFile("Assets/Images/racket_boris.png");
@@ -97,7 +97,7 @@ namespace PongMasters
                     hitLimitStart = 9;
                     hitLimitEnd = 15;
                     playerSpeed = 10;
-                    dialogue = new string[] { "I do not underestimate my opponents. Let’s see what you can do.", "A match should be like a haiku - precise and elegant.", "Your movements are too slow. Anticipate the ball.", "A true player adapts. Can you?", "A well-fought match. But victory is mine.", "You lack discipline. Train harder.", "Impressive. You are more skilled than I thought.", "This loss is a lesson. I will return stronger." };
+                    dialogue = new string[] { "I do not underestimate my opponents. Let’s see what you can do.", "A match should be like a haiku - precise and elegant.", "Impressive, but not enough.", "A true player adapts. Can you?", "A well-fought match. But victory is mine.", "You lack discipline. Train harder.", "Impressive. You are more skilled than I thought.", "This loss is a lesson. I will return stronger." };
                     opponentCard.Image = Image.FromFile("Assets/Images/card_emiko.png");
                     opponentText.BackgroundImage = Image.FromFile("Assets/Images/textbox_emiko.png");
                     racketOpponent.Image = Image.FromFile("Assets/Images/racket_emiko.png");
@@ -121,7 +121,7 @@ namespace PongMasters
                     hitLimitStart = 15;
                     hitLimitEnd = 21;
                     playerSpeed = 12;
-                    dialogue = new string[] { "I play for perfection. Let’s begin.", "Your reflexes will be tested.", "Predictable. I already knew you’d do that.", "Your technique is flawed. I see every weakness.", "Efficiency leads to victory. That is all.", "You were never in control of this match.", "...Interesting. I did not anticipate that outcome.", "You have earned my respect. Well played." };
+                    dialogue = new string[] { "I play for perfection.", "Your reflexes will be tested. Let’s begin.", "Predictable, but well played.", "Your technique is flawed. I see every weakness.", "Efficiency leads to victory. That is all.", "You were never in control of this match.", "...Interesting. I did not anticipate that outcome.", "You have earned my respect. Well played." };
                     opponentCard.Image = Image.FromFile("Assets/Images/card_lin.png");
                     opponentText.BackgroundImage = Image.FromFile("Assets/Images/textbox_lin.png");
                     racketOpponent.Image = Image.FromFile("Assets/Images/racket_lin.png");
