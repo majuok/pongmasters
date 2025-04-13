@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using WMPLib;
+using System.Reflection;
 
 namespace PongMasters
 {
@@ -29,6 +30,7 @@ namespace PongMasters
             opponentsWonPrev = opponentsWon;
             this.Activated += RefreshScoreboard;
 
+            infoText.Font = FontLoader.GetFont(16f, FontStyle.Regular);
             buttonPlay.Image = Image.FromFile("Assets/Images/button_play.png");
             buttonExit.Image = Image.FromFile("Assets/Images/button_exit.png");
             musicPlayer.settings.volume = 33;
@@ -84,14 +86,16 @@ namespace PongMasters
                     nameLabels[i].Text = opponents[i].Name;
                     countryLabels[i].Text = opponents[i].Country;
                     nameLabels[i].ForeColor = Color.White;
-                    nameLabels[i].Font = new Font(nameLabels[i].Font, FontStyle.Regular);
+                    nameLabels[i].Font = FontLoader.GetFont(18f, FontStyle.Regular);
+                    countryLabels[i].Font = FontLoader.GetFont(18f, FontStyle.Regular);
                 }
                 else if (i == 5 - opponentsWon) // Player's position
                 {
                     nameLabels[i].Text = "Sinä";
                     countryLabels[i].Text = "Suomi";
                     nameLabels[i].ForeColor = Color.LimeGreen; // Highlight player
-                    nameLabels[i].Font = new Font(nameLabels[i].Font, FontStyle.Regular);
+                    nameLabels[i].Font = FontLoader.GetFont(18f, FontStyle.Regular);
+                    countryLabels[i].Font = FontLoader.GetFont(18f, FontStyle.Regular);
                 }
                 else // Defeated opponents
                 {
@@ -99,7 +103,8 @@ namespace PongMasters
                     nameLabels[i].Text = opponents[4 - (opponentsWon - defeatedIndex)].Name;
                     countryLabels[i].Text = opponents[4 - (opponentsWon - defeatedIndex)].Country;
                     nameLabels[i].ForeColor = Color.White;
-                    nameLabels[i].Font = new Font(nameLabels[i].Font, FontStyle.Strikeout);
+                    nameLabels[i].Font = FontLoader.GetFont(18f, FontStyle.Strikeout);
+                    countryLabels[i].Font = FontLoader.GetFont(18f, FontStyle.Strikeout);
                 }
             }
         }

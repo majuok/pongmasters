@@ -12,6 +12,7 @@ using WMPLib;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Collections;
+using System.Reflection;
 
 namespace PongMasters
 {
@@ -66,6 +67,9 @@ namespace PongMasters
 
             opponentPoint1.Image = opponentPoint2.Image = opponentPoint3.Image = Image.FromFile("Assets/Images/point_empty.png");
             playerPoint1.Image = playerPoint2.Image = playerPoint3.Image = Image.FromFile("Assets/Images/point_empty2.png");
+
+            opponentDialogue.Font = FontLoader.GetFont(6.5f, FontStyle.Regular);
+            playerTimer.Font = FontLoader.GetFont(17f, FontStyle.Regular);
 
             switch (opponentsWon)
             {
@@ -606,7 +610,7 @@ namespace PongMasters
                 ballYspeed = -Math.Abs(ballYspeed);
             }
         }
-        
+
         private string GetOpponentName(int index)
         {
             string[] names = { "mikko", "boris", "emiko", "ace", "lin" };
@@ -684,20 +688,6 @@ namespace PongMasters
         private void SaveProgress(int opponentsWon)
         {
             File.WriteAllText("progress.txt", opponentsWon.ToString());
-        }
-
-        private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void gametable_Paint(object sender, PaintEventArgs e)
-        {
         }
 
         private void Gametable_Paint(object sender, PaintEventArgs e)

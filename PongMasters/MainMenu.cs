@@ -13,7 +13,12 @@ namespace PongMasters
 
         public MainMenu()
         {
+            this.AutoScaleMode = AutoScaleMode.None;
             InitializeComponent();
+
+            this.Size = new Size(850, 850);
+            this.MinimumSize = new Size(850, 850);
+
             buttonPlay.Image = Image.FromFile("Assets/Images/button_play.png");
             buttonExit.Image = Image.FromFile("Assets/Images/button_exit.png");
 
@@ -22,12 +27,9 @@ namespace PongMasters
             musicPlayer.settings.volume = 33;
             musicPlayer.controls.play();
 
+            label1.Font = FontLoader.GetFont(18f, FontStyle.Regular);
+
             this.VisibleChanged += MainMenu_VisibleChanged;
-        }
-
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
         }
 
         // MouseEnter/MouseLeave triggers immediately while MouseHover triggers after a short delay

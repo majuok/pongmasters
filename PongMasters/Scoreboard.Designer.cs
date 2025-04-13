@@ -164,9 +164,10 @@
             this.SixthCountry.ForeColor = System.Drawing.Color.White;
             this.SixthCountry.Location = new System.Drawing.Point(467, 412);
             this.SixthCountry.Name = "SixthCountry";
-            this.SixthCountry.Size = new System.Drawing.Size(183, 33);
+            this.SixthCountry.Size = new System.Drawing.Size(182, 30);
             this.SixthCountry.TabIndex = 11;
             this.SixthCountry.Text = "Finland";
+            this.SixthCountry.UseCompatibleTextRendering = true;
             // 
             // FifthCountry
             // 
@@ -176,9 +177,10 @@
             this.FifthCountry.ForeColor = System.Drawing.Color.White;
             this.FifthCountry.Location = new System.Drawing.Point(467, 348);
             this.FifthCountry.Name = "FifthCountry";
-            this.FifthCountry.Size = new System.Drawing.Size(183, 33);
+            this.FifthCountry.Size = new System.Drawing.Size(182, 30);
             this.FifthCountry.TabIndex = 10;
             this.FifthCountry.Text = "Finland";
+            this.FifthCountry.UseCompatibleTextRendering = true;
             // 
             // FourthCountry
             // 
@@ -188,9 +190,10 @@
             this.FourthCountry.ForeColor = System.Drawing.Color.White;
             this.FourthCountry.Location = new System.Drawing.Point(467, 283);
             this.FourthCountry.Name = "FourthCountry";
-            this.FourthCountry.Size = new System.Drawing.Size(159, 33);
+            this.FourthCountry.Size = new System.Drawing.Size(157, 30);
             this.FourthCountry.TabIndex = 9;
             this.FourthCountry.Text = "Russia";
+            this.FourthCountry.UseCompatibleTextRendering = true;
             // 
             // ThirdCountry
             // 
@@ -200,9 +203,10 @@
             this.ThirdCountry.ForeColor = System.Drawing.Color.White;
             this.ThirdCountry.Location = new System.Drawing.Point(467, 219);
             this.ThirdCountry.Name = "ThirdCountry";
-            this.ThirdCountry.Size = new System.Drawing.Size(135, 33);
+            this.ThirdCountry.Size = new System.Drawing.Size(132, 30);
             this.ThirdCountry.TabIndex = 8;
             this.ThirdCountry.Text = "Japan";
+            this.ThirdCountry.UseCompatibleTextRendering = true;
             // 
             // SecondCountry
             // 
@@ -212,9 +216,10 @@
             this.SecondCountry.ForeColor = System.Drawing.Color.White;
             this.SecondCountry.Location = new System.Drawing.Point(467, 155);
             this.SecondCountry.Name = "SecondCountry";
-            this.SecondCountry.Size = new System.Drawing.Size(87, 33);
+            this.SecondCountry.Size = new System.Drawing.Size(83, 30);
             this.SecondCountry.TabIndex = 7;
             this.SecondCountry.Text = "USA";
+            this.SecondCountry.UseCompatibleTextRendering = true;
             // 
             // FirstCountry
             // 
@@ -224,9 +229,10 @@
             this.FirstCountry.ForeColor = System.Drawing.Color.White;
             this.FirstCountry.Location = new System.Drawing.Point(467, 90);
             this.FirstCountry.Name = "FirstCountry";
-            this.FirstCountry.Size = new System.Drawing.Size(135, 33);
+            this.FirstCountry.Size = new System.Drawing.Size(132, 30);
             this.FirstCountry.TabIndex = 6;
             this.FirstCountry.Text = "China";
+            this.FirstCountry.UseCompatibleTextRendering = true;
             // 
             // SixthName
             // 
@@ -236,9 +242,10 @@
             this.SixthName.ForeColor = System.Drawing.Color.White;
             this.SixthName.Location = new System.Drawing.Point(111, 412);
             this.SixthName.Name = "SixthName";
-            this.SixthName.Size = new System.Drawing.Size(111, 33);
+            this.SixthName.Size = new System.Drawing.Size(107, 30);
             this.SixthName.TabIndex = 5;
             this.SixthName.Text = "Sinä";
+            this.SixthName.UseCompatibleTextRendering = true;
             // 
             // FifthName
             // 
@@ -248,9 +255,10 @@
             this.FifthName.ForeColor = System.Drawing.Color.White;
             this.FifthName.Location = new System.Drawing.Point(110, 348);
             this.FifthName.Name = "FifthName";
-            this.FifthName.Size = new System.Drawing.Size(351, 33);
+            this.FifthName.Size = new System.Drawing.Size(355, 30);
             this.FifthName.TabIndex = 4;
             this.FifthName.Text = "Mikko Virtanen";
+            this.FifthName.UseCompatibleTextRendering = true;
             // 
             // FourthName
             // 
@@ -260,9 +268,10 @@
             this.FourthName.ForeColor = System.Drawing.Color.White;
             this.FourthName.Location = new System.Drawing.Point(111, 283);
             this.FourthName.Name = "FourthName";
-            this.FourthName.Size = new System.Drawing.Size(303, 33);
+            this.FourthName.Size = new System.Drawing.Size(305, 30);
             this.FourthName.TabIndex = 3;
             this.FourthName.Text = "Boris Ivanov";
+            this.FourthName.UseCompatibleTextRendering = true;
             // 
             // ThirdName
             // 
@@ -272,9 +281,10 @@
             this.ThirdName.ForeColor = System.Drawing.Color.White;
             this.ThirdName.Location = new System.Drawing.Point(111, 219);
             this.ThirdName.Name = "ThirdName";
-            this.ThirdName.Size = new System.Drawing.Size(303, 33);
+            this.ThirdName.Size = new System.Drawing.Size(305, 30);
             this.ThirdName.TabIndex = 2;
             this.ThirdName.Text = "Emiko Tanaka";
+            this.ThirdName.UseCompatibleTextRendering = true;
             // 
             // SecondName
             // 
@@ -284,9 +294,10 @@
             this.SecondName.ForeColor = System.Drawing.Color.White;
             this.SecondName.Location = new System.Drawing.Point(110, 155);
             this.SecondName.Name = "SecondName";
-            this.SecondName.Size = new System.Drawing.Size(255, 33);
+            this.SecondName.Size = new System.Drawing.Size(256, 30);
             this.SecondName.TabIndex = 1;
             this.SecondName.Text = "Ace Carter";
+            this.SecondName.UseCompatibleTextRendering = true;
             // 
             // FirstName
             // 
@@ -296,9 +307,10 @@
             this.FirstName.ForeColor = System.Drawing.Color.White;
             this.FirstName.Location = new System.Drawing.Point(111, 90);
             this.FirstName.Name = "FirstName";
-            this.FirstName.Size = new System.Drawing.Size(279, 33);
+            this.FirstName.Size = new System.Drawing.Size(280, 30);
             this.FirstName.TabIndex = 0;
             this.FirstName.Text = "Lin Shidong";
+            this.FirstName.UseCompatibleTextRendering = true;
             // 
             // infoText
             // 
@@ -312,6 +324,7 @@
             this.infoText.TabIndex = 3;
             this.infoText.Text = "Päihitä viisi\r\nvastustajaa voittaaksesi!";
             this.infoText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.infoText.UseCompatibleTextRendering = true;
             // 
             // Scoreboard
             // 

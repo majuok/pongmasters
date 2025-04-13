@@ -88,6 +88,7 @@
             this.opponentDialogue.Size = new System.Drawing.Size(164, 80);
             this.opponentDialogue.TabIndex = 0;
             this.opponentDialogue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.opponentDialogue.UseCompatibleTextRendering = true;
             // 
             // pictureBox2
             // 
@@ -116,11 +117,12 @@
             this.playerTimer.Font = new System.Drawing.Font("Press Start 2P", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.playerTimer.Location = new System.Drawing.Point(3, 0);
             this.playerTimer.Name = "playerTimer";
-            this.playerTimer.Padding = new System.Windows.Forms.Padding(0, 12, 0, 0);
+            this.playerTimer.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
             this.playerTimer.Size = new System.Drawing.Size(164, 80);
             this.playerTimer.TabIndex = 1;
             this.playerTimer.Text = "00:00";
             this.playerTimer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.playerTimer.UseCompatibleTextRendering = true;
             // 
             // opponentPoint3
             // 

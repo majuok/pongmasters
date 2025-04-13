@@ -202,7 +202,9 @@ A fast-paced single-player arcade table tennis game made in C# WinForms. The gam
 - Animations for opponents (idle, taunt, victory, etc.)
 - Ball effects for special moves (like pulse or trail)
 - Hardcore difficulty (one defeat puts player to the beginning)
+- Ability to move with A and D keys
 - Music mute button
+- Dialogue skip button
 
 ## 📂 Installation
 
