@@ -6,11 +6,11 @@ A fast-paced single-player arcade table tennis game made in C# WinForms. The gam
 - [About the Game](#-about-the-game)
 - [How It Works](#-how-it-works)
 - [Game Flow](#-game-flow)
-- [Screenshots](#screenshots)
+- [Screenshots](#-screenshots)
 - [Key Code Features](#-key-code-features)
 - [Ideas for Future Development](#-ideas-for-future-development)
-- [Installation](#installation)
-- [License](#license)
+- [Installation](#-installation)
+- [License](#-license)
 
 ## 🎮 About the Game
 
@@ -29,7 +29,7 @@ A fast-paced single-player arcade table tennis game made in C# WinForms. The gam
 
 ![Flow Chart](PongMasters/Assets/Images/flowchart.png)
 
-## 🖼️ Screenshots
+## 📸 Screenshots
 
 ### Main Menu
 ![Main Menu](PongMasters/Assets/Images/preview_menu.png)
@@ -194,7 +194,7 @@ A fast-paced single-player arcade table tennis game made in C# WinForms. The gam
   SoundManager.PlaySoundEffect("Assets/Sounds/menu_press_play.mp3");
   ```
 
-## 🛠️ Ideas for Future Development
+## 💡 Ideas for Future Development
 
 - Scalability (for different screen sizes)
 - Option for English
@@ -208,7 +208,9 @@ A fast-paced single-player arcade table tennis game made in C# WinForms. The gam
 
 ## 📂 Installation
 
-You can download the installer via [GitHub Releases](https://github.com/majuok/pongmasters/releases). Runs on Windows 10/11 with .NET Framework. No additional dependencies are required.
+You can download the installer via [GitHub Releases](https://github.com/majuok/pongmasters/releases). The game runs on Windows 10/11 with .NET Framework and requires no additional dependencies.
+
+> ⚠️ Note: The game is optimized for screens 850 pixels tall or larger. On 720p monitors, parts of the window may not fit on screen properly.
 
 ## 📜 License
 
